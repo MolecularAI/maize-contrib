@@ -1,0 +1,97 @@
+# A single stage RL run
+
+run_type = "staged_learning"
+use_cuda = true
+tb_logdir = "tb_logs_RL"
+json_out_config = "_RL.json"
+
+[parameters]
+
+use_checkpoint = false
+
+prior_file = "random.prior.new"
+agent_file = "random.prior.new"
+summary_csv_prefix = "RL"
+
+batch_size = 8
+uniquify_smiles = true
+randomize_smiles = true
+
+
+[learning_strategy]
+
+type = "dap"
+sigma = 150
+rate = 0.0001
+
+
+[inception]
+
+# not used
+
+
+[diversity_filter]
+type = "IdenticalMurckoScaffold"
+bucket_size = 25
+minscore = 0.4
+minsimilarity = 0.4
+
+
+[[stage]]
+chkpt_file = 'RL.chkpt'
+
+termination = "simple"
+max_score = 1.0
+min_steps = 4
+max_steps = 100
+
+scoring_function.type = "custom_sum"
+scoring_function.parallel = true
+
+[[stage.scoring_function.component]]
+component_type = "custom_alerts"
+name = "Custom alerts"
+weight = 1.0
+
+specific_parameters.smiles = [
+    "[*;r8]",
+    "[*;r9]",
+    "[*;r10]",
+    "[*;r11]",
+    "[*;r12]",
+    "[*;r13]",
+    "[*;r14]",
+    "[*;r15]",
+    "[*;r16]",
+    "[*;r17]",
+    "[#8][#8]",
+    "[#6;+]",
+    "[#16][#16]",
+    "[#7;!n][S;!$(S(=O)=O)]",
+    "[#7;!n][#7;!n]",
+    "C#C",
+    "C(=[O,S])[O,S]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#7;!n]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]"
+]
+
+
+[[stage.scoring_function.component]]
+component_type =  "num_hbd_lipinski"
+name =  "HB-donors"
+weight = 1.0
+specific_parameters.transformation.high = 6
+specific_parameters.transformation.low = 0
+specific_parameters.transformation.transformation_type = "step"
+
+[[stage.scoring_function.component]]
+component_type =  "num_rotatable_bonds"
+name =  "Number of rotatable bonds"
+weight = 1.0
+specific_parameters.transformation.high = 9
+specific_parameters.transformation.low = 0
+specific_parameters.transformation.transformation_type = "step"

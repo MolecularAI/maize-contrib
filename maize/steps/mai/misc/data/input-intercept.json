@@ -1,0 +1,103 @@
+{
+    "logging": {
+        "job_id": "REINVENT 3.2 test",
+        "job_name": "REINVENT 3.2 test",
+        "logging_frequency": 100,
+        "logging_path": "./reinvent_logging/",
+        "recipient": "local",
+        "result_folder": "./reinvent_results",
+        "sender": "http://127.0.0.1"
+    },
+    "model_type": "default",
+    "parameters": {
+        "diversity_filter": {
+            "bucket_size": 100,
+            "minscore": 0.20,
+            "minsimilarity": 0.0,
+            "name": "IdenticalMurckoScaffold"
+        },
+        "inception": {
+            "memory_size": 100,
+            "sample_size": 10,
+            "smiles": []
+        },
+        "reinforcement_learning": {
+            "agent": "random.prior.new",
+            "batch_size": 16,
+            "learning_rate": 0.0001,
+            "margin_threshold": 50,
+            "n_steps": 500,
+            "prior": "random.prior.new",
+            "sigma": 128
+        },
+        "scoring_function": {
+            "name": "custom_product",
+            "parallel": true,
+            "parameters": [
+                {
+                    "component_type": "molecular_weight",
+                    "name": "Molecular weight",
+                    "specific_parameters": {
+                        "transformation": {
+                            "coef_div": 550,
+                            "coef_se": 20,
+                            "coef_si": 20,
+                            "high": 550,
+                            "low": 200,
+                            "transformation_type": "double_sigmoid"
+                        }
+                    },
+                    "weight": 1
+                },
+                {
+                    "component_type": "custom_alerts",
+                    "name": "simple alerts",
+                    "weight": 1,
+                    "specific_parameters": {
+                        "smiles": [
+                            "[*;r7]",
+                            "[*;r8]",
+                            "[*;r9]",
+                            "[*;r10]",
+                            "[*;r11]",
+                            "[*;r12]",
+                            "[*;r13]",
+                            "[*;r14]",
+                            "[*;r15]",
+                            "[*;r16]",
+                            "[*;r17]",
+                            "[#8][#8]",
+                            "[#6;+]",
+                            "[#16][#16]",
+                            "[#7;!n][S;!$(S(=O)=O)]",
+                            "[#7;!n][#7;!n]",
+                            "C#C",
+                            "C=N",
+                            "C(=[O,S])[O,S]"
+                        ]
+                    }
+                },
+                {
+                    "component_type": "qed_score",
+                    "name": "QED Score",
+                    "weight": 1
+                },
+                {
+                    "weight": 1,
+                    "component_type": "num_hbd_lipinski",
+                    "name": "Number of HB-donors (Lipinski)",
+                    "specific_parameters": {
+                        "transformation": {
+                            "high": 6,
+                            "low": 2,
+                            "transformation_type": "reverse_sigmoid",
+                            "k": 0.5
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "run_type": "reinforcement_learning",
+    "version": 3
+}

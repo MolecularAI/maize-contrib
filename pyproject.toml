@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maize-contrib"
+description = "Custom maize nodes and subgraphs"
+version = "0.2.2"
+authors = [{name = "AstraZeneca"}]
+maintainers = [{name = "Thomas Löhr", email = "thomas.lohr@astrazeneca.com"}]
+requires-python = ">=3.10"
+dependencies = [
+    "maize>=0.3.2",
+    "rdkit>=2022.9.5",
+]
+
+[project.scripts]
+dock = "maize.graphs.mai.dock:dock"
+dock_gpu = "maize.graphs.mai.dock:dock_gpu"
+dock_single = "maize.graphs.mai.dock:dock_single"
+score_only = "maize.graphs.mai.dock:score_only"
+prepare_grid = "maize.graphs.mai.dock:prepare_grid"
+prepare_pdbqt = "maize.graphs.mai.dock:prepare_pdbqt"
+
+[tool.setuptools]
+packages = [
+    "maize.steps.mai",
+    "maize.graphs.mai",
+    "maize.utilities.chem",
+]
+
+[tool.pytest.ini_options]
+config = "test-config.toml"
+log_cli = true
+log_cli_level = "DEBUG"
+addopts = ["-vv"]
+python_files = ["*.py"]
+python_classes = ["TestSuite*"]
+testpaths = [
+    "maize/steps",
+]
+
+[tool.mypy]
+mypy_path = "../maize-dev"
+follow_imports = "silent"
+ignore_missing_imports = true
+strict = true
+explicit_package_bases = true
+namespace_packages = true
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
