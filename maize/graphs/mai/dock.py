@@ -1,6 +1,5 @@
 """Docking workflows and subgraphs"""
 
-from collections.abc import Callable
 import json
 from pathlib import Path
 import sys
