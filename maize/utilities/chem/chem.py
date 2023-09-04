@@ -183,7 +183,7 @@ def save_sdf_library(
     file
         Path to the output SDF file
     smiles
-        List of `IsomerCollection`s to write
+        List of `IsomerCollection` to write
     conformers
         Whether to write all conformers
     split_strategy
@@ -212,7 +212,7 @@ def load_sdf_library(
 ) -> list["IsomerCollection"]:
     """
     Loads an SDF library containing multiple molecules with potentially
-    multiple isomers each, and creates `IsomerCollection`s for all of them.
+    multiple isomers each, and creates an `IsomerCollection` for all of them.
 
     Parameters
     ----------
@@ -339,7 +339,7 @@ def mcs(*mols: "Isomer") -> "Isomer":
     Parameters
     ----------
     mols
-        Reference `Isomer`s
+        Reference `Isomer` molecules
 
     Returns
     -------
@@ -1346,12 +1346,6 @@ class IsomerCollection:
         with Chem.SDWriter(path.as_posix()) as writer:
             for iso in self.molecules:
                 writer.write(iso._molecule)
-    def to_smiles(self) -> List[str]:
-        """
-        return smiles for an isomer collection
-        """
-        return [iso.to_smiles() for iso in self.molecules]
-
     def to_smiles(self) -> List[str]:
         """
         return smiles for an isomer collection

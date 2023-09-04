@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 0.2.3
+### Changes
+- Removed interface for REINVENT 3.2
+
+### Fixes
+- Cleanup of package structure
+- Updated dependencies
+- Added explicit check for Schrodinger license
+
 ## Version 0.2.2
 ### Features
 - Added Schrodinger grid preparation tools

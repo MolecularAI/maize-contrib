@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "maize-contrib"
 description = "Custom maize nodes and subgraphs"
-version = "0.2.2"
+version = "0.2.3"
 authors = [{name = "AstraZeneca"}]
 maintainers = [{name = "Thomas Löhr", email = "thomas.lohr@astrazeneca.com"}]
 requires-python = ">=3.10"
@@ -13,6 +13,9 @@ dependencies = [
     "maize>=0.3.2",
     "rdkit>=2022.9.5",
 ]
+
+[project.optional-dependencies]
+dock = ["meeko==0.4.0", "scipy>=1.11.2"]
 
 [project.scripts]
 dock = "maize.graphs.mai.dock:dock"
@@ -41,7 +44,7 @@ testpaths = [
 ]
 
 [tool.mypy]
-mypy_path = "../maize-dev"
+mypy_path = "../maize"
 follow_imports = "silent"
 ignore_missing_imports = true
 strict = true

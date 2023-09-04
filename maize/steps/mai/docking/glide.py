@@ -7,10 +7,10 @@ from typing import Annotated, Literal, Any
 
 import pytest
 
-from maize.core.interface import Input, Output, Parameter, FileParameter, Suffix
+from maize.core.interface import Input, Output, Parameter, Suffix
 from maize.utilities.testing import TestRig
 from maize.utilities.validation import SuccessValidator, FileValidator
-from maize.steps.mai.common.schrodinger import Schrodinger
+from maize.steps.mai.common.schrodinger import Schrodinger, has_license
 from maize.utilities.chem import (
     IsomerCollection,
     Isomer,
@@ -144,6 +144,7 @@ def grid(shared_datadir: Any) -> Any:
     return shared_datadir / "1UYD_grid_no_constraints.zip"
 
 
+@pytest.mark.skipif(not has_license(), reason="No Schrodinger license found")
 class TestSuiteGlide:
     def test_Glide(
         self, temp_working_dir: Any, test_config: Any, example_smiles: Any, grid: Any

@@ -25,10 +25,6 @@ sigma = 150
 rate = 0.0001
 
 
-[inception]
-
-# not used
-
 
 [diversity_filter]
 type = "IdenticalMurckoScaffold"
@@ -45,15 +41,17 @@ max_score = 1.0
 min_steps = 4
 max_steps = 100
 
-scoring_function.type = "custom_sum"
-scoring_function.parallel = true
+[stage.scoring]
+type = "custom_sum"
+parallel = true
 
-[[stage.scoring_function.component]]
-component_type = "custom_alerts"
+[stage.scoring.component.custom_alerts]
+
+[[stage.scoring.component.custom_alerts.endpoint]]
 name = "Custom alerts"
 weight = 1.0
 
-specific_parameters.smiles = [
+params.smarts = [
     "[*;r8]",
     "[*;r9]",
     "[*;r10]",
@@ -79,19 +77,3 @@ specific_parameters.smiles = [
     "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]"
 ]
 
-
-[[stage.scoring_function.component]]
-component_type =  "num_hbd_lipinski"
-name =  "HB-donors"
-weight = 1.0
-specific_parameters.transformation.high = 6
-specific_parameters.transformation.low = 0
-specific_parameters.transformation.transformation_type = "step"
-
-[[stage.scoring_function.component]]
-component_type =  "num_rotatable_bonds"
-name =  "Number of rotatable bonds"
-weight = 1.0
-specific_parameters.transformation.high = 9
-specific_parameters.transformation.low = 0
-specific_parameters.transformation.transformation_type = "step"

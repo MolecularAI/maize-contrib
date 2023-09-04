@@ -5,11 +5,13 @@
 from pathlib import Path
 from typing import Any, Literal
 
+import pytest
+
 from maize.core.interface import Input, Output, Parameter, Flag
 from maize.utilities.testing import TestRig
 from maize.utilities.validation import SuccessValidator
 
-from maize.steps.mai.common.schrodinger import Schrodinger
+from maize.steps.mai.common.schrodinger import Schrodinger, has_license
 from maize.utilities.chem import IsomerCollection, save_smiles, load_sdf_library
 
 
@@ -83,6 +85,7 @@ class Ligprep(Schrodinger):
         self.out.send(mols)
 
 
+@pytest.mark.skipif(not has_license(), reason="No Schrodinger license found")
 class TestSuiteLigprep:
     def test_Ligprep(self, temp_working_dir: Any, test_config: Any, example_smiles: Any) -> None:
         rig = TestRig(Ligprep, config=test_config)

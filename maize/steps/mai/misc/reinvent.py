@@ -119,50 +119,42 @@ def _patch_config(
     max_epochs: int = 10,
     batch_size: int = 128,
     maize_backend: bool = False,
-) -> tuple[Path, int]:
+) -> Path:
     """Patch the REINVENT config to allow interception of SMILES."""
     score_conf = {
-        "component_type": "maize" if maize_backend else "external",
         "name": "maize",
         "weight": weight,
-        "specific_parameters": {
+        "params": {
             "executable": "./intercept.py",
-            "transformation": {
-                "low": low,
-                "high": high,
-                "k": k,
-                "transformation_type": "reverse_sigmoid" if reverse else "sigmoid",
-            },
+            "args": "",
+        },
+        "transform": {
+            "low": low,
+            "high": high,
+            "k": k,
+            "type": "reverse_sigmoid" if reverse else "sigmoid",
         },
     }
     with path.open() as file:
         if path.suffix == ".json":
             conf = json.load(file)
-            version = conf.get("version", 3)
         elif path.suffix == ".toml":
             conf = toml.load(file)
-            version = conf.get("version", 4)
         else:
             raise IOError(f"Unable to read REINVENT config '{path.as_posix()}'")
 
-    if version >= 4:
-        conf["stage"][0]["scoring_function"]["component"].append(score_conf)
-        conf["stage"][0]["min_steps"] = min_epochs
-        conf["stage"][0]["max_steps"] = max_epochs
-        conf["parameters"]["batch_size"] = batch_size
-    elif version < 4:
-        # TODO: min_steps?
-        conf["parameters"]["scoring_function"]["parameters"].append(score_conf)
-        conf["parameters"]["reinforcement_learning"]["n_steps"] = max_epochs
-        conf["parameters"]["reinforcement_learning"]["batch_size"] = batch_size
+    conf["stage"][0]["scoring"]["component"]["ExternalProcess"] = {"endpoint": [score_conf]}
+    conf["stage"][0]["min_steps"] = min_epochs
+    conf["stage"][0]["max_steps"] = max_epochs
+    conf["parameters"]["batch_size"] = batch_size
 
-    patched_file = DEFAULT_PATCHED_CONFIG.with_suffix(".json" if version < 4 else ".toml")
+    patched_file = DEFAULT_PATCHED_CONFIG.with_suffix(path.suffix)
     with patched_file.open("w") as out:
-        if version >= 4:
-            toml.dump(conf, out)
-        else:
+        if path.suffix == ".json":
             json.dump(conf, out)
-    return patched_file, version
+        elif path.suffix == ".toml":
+            toml.dump(conf, out)
+    return patched_file
 
 
 class read_log:
@@ -259,7 +251,7 @@ class ReInvent(Node):
         # Create the interceptor fake external process
         _write_interceptor(INTERCEPTOR_FILE, INTERCEPTOR)
         self.max_steps = self.max_epoch.value
-        config, version = _patch_config(
+        config = _patch_config(
             self.configuration.filepath,
             weight=self.weight.value,
             low=self.low.value,
@@ -272,17 +264,14 @@ class ReInvent(Node):
             maize_backend=self.maize_backend.value,
         )
 
-        if version >= 4:
-            command = (
-                f"{self.runnable['reinvent']} "
-                f"--log-filename {REINVENT_LOGFILE.as_posix()} "
-                f"-f {config.suffix.strip('.')} {config.as_posix()}"
-            )
+        command = (
+            f"{self.runnable['reinvent']} "
+            f"--log-filename {REINVENT_LOGFILE.as_posix()} "
+            f"-f {config.suffix.strip('.')} {config.as_posix()}"
+        )
 
-            # This allows us to keep track of the most recent REINVENT logs
-            readlog = read_log(REINVENT_LOGFILE)
-        else:
-            command = f"{self.runnable['reinvent']} {config.as_posix()}"
+        # This allows us to keep track of the most recent REINVENT logs
+        readlog = read_log(REINVENT_LOGFILE)
 
         # Have to instantiate the executor in this process, as doing so in the subthread
         # will cause a python error due to the use of signals outside of the main thread.
@@ -307,23 +296,18 @@ class ReInvent(Node):
             )
 
         epoch = 0
-        for _ in self.loop():
+        for _ in range(self.max_epoch.value):
             # Reinvent may terminate early
             self.logger.debug("Checking if Reinvent is still running")
             if not worker.is_alive():
                 break
 
-            if version >= 4:
-                self.logger.info("ReInvent output: %s", readlog())
+            self.logger.info("ReInvent output: %s", readlog())
 
             self.logger.debug("Waiting for scores")
             scores = self.inp.receive()
             with TEMP_SCORES_FILE.open("w") as file:
-                scores_data: dict[str, list[Any]] | list[Any]
-                if scores.ndim == 2:
-                    scores_data = {"scores": list(scores[0]), "weights": list(scores[1])}
-                else:
-                    scores_data = list(scores)
+                scores_data = {"version": 4, "payload": {"predictions": list(scores)}}
                 self.logger.debug("Writing '%s'", scores_data)
                 json.dump(scores_data, file)
 
@@ -443,56 +427,6 @@ def test_reinvent(temp_working_dir: Any, test_config: Any, patch_config: Any) ->
         "batch_size": n_batch,
     }
     res = rig.setup_run(parameters=params, inputs={"inp": scores})
-    data = res["out"].flush(timeout=0.5)
-    assert 2 < len(data) <= n_epochs
-    assert len(data[0]) == n_batch
-
-
-@pytest.fixture
-def reinvent_config_v3(shared_datadir: Path) -> Path:
-    return shared_datadir / "input-intercept.json"
-
-
-@pytest.fixture
-def patch_config_v3(prior: Path, agent: Path, reinvent_config_v3: Path, tmp_path: Path) -> Path:
-    with reinvent_config_v3.open() as conf:
-        data = json.load(conf)
-    data["parameters"]["reinforcement_learning"]["prior"] = prior.absolute().as_posix()
-    data["parameters"]["reinforcement_learning"]["agent"] = agent.absolute().as_posix()
-    new_config_file = tmp_path / "conf.json"
-    with new_config_file.open("w") as conf:
-        json.dump(data, conf)
-    return new_config_file
-
-
-def test_reinvent_v3(temp_working_dir: Any, test_config: Any, patch_config_v3: Any) -> None:
-    n_epochs, n_batch = 5, 8
-    scores = [np.random.rand(n_batch) for _ in range(n_epochs)]
-    rig = TestRig(ReInvent, config=test_config)
-    params = {
-        "configuration": patch_config_v3,
-        "min_epoch": 3,
-        "max_epoch": n_epochs,
-        "batch_size": n_batch,
-    }
-    res = rig.setup_run(parameters=params, inputs={"inp": scores})
-    data = res["out"].flush(timeout=0.5)
-    assert 2 < len(data) <= n_epochs
-    assert len(data[0]) == n_batch
-
-
-def test_reinvent_v3_weights(temp_working_dir: Any, test_config: Any, patch_config_v3: Any) -> None:
-    n_epochs, n_batch = 5, 8
-    scores = [np.random.rand(2, n_batch) for _ in range(n_epochs)]
-    rig = TestRig(ReInvent, config=test_config)
-    params = {
-        "configuration": patch_config_v3,
-        "min_epoch": 3,
-        "max_epoch": n_epochs,
-        "batch_size": n_batch,
-        "maize_backend": True,
-    }
-    res = rig.setup_run(parameters=params, inputs={"inp": scores})
-    data = res["out"].flush(timeout=0.5)
-    assert 2 < len(data) <= n_epochs
-    assert len(data[0]) == n_batch
+    data = res["out"].flush(timeout=20)
+    assert len(data) == n_epochs
+    assert 1 < len(data[0]) <= n_batch

@@ -3,14 +3,14 @@
 # pylint: disable=import-outside-toplevel, import-error
 
 from pathlib import Path
-from typing import Annotated, Literal, Any
+from typing import Annotated, Any
 
 import pytest
 
-from maize.core.interface import Input, Output, Parameter, FileParameter, Suffix
+from maize.core.interface import Input, Output, Parameter, Suffix
 from maize.utilities.testing import TestRig
 from maize.utilities.validation import SuccessValidator, FileValidator
-from maize.steps.mai.common.schrodinger import Schrodinger
+from maize.steps.mai.common.schrodinger import Schrodinger, has_license
 
 
 
@@ -55,6 +55,7 @@ class Prepwizard(Schrodinger):
         self.run_command(command, validators=[SuccessValidator("JobId:"), FileValidator(output)])
         self.out.send(output)
 
+@pytest.mark.skipif(not has_license(), reason="No Schrodinger license found")
 class TestSuitePrepwizard:
     def test_prepwizard(self, temp_working_dir: Any, test_config: Any, input_protein: Any) -> None:
         rig = TestRig(Prepwizard, config=test_config)

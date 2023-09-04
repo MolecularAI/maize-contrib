@@ -3,6 +3,8 @@
 # pylint: disable=import-outside-toplevel, import-error
 
 from collections.abc import Sequence
+import os
+from pathlib import Path
 import re
 from subprocess import CompletedProcess
 import time
@@ -11,6 +13,14 @@ from maize.core.node import Node
 from maize.core.interface import Parameter
 from maize.utilities.execution import CommandRunner, JobResourceConfig
 from maize.utilities.validation import Validator
+
+
+SCHRODINGER_LICENSE = "SCHROD_LICENSE_FILE"
+
+
+def has_license() -> bool:
+    """``True`` if the system has a Schrodinger license, ``False`` otherwise."""
+    return not ((loc := os.environ.get(SCHRODINGER_LICENSE, "")) == "" or not Path(loc).exists())
 
 
 class TokenGuard:
@@ -25,13 +35,18 @@ class TokenGuard:
     """
 
     LICENSE_RE = re.compile(
-        r"Users\s+of\s+(.*):.*of\s+(\d+)\s+licenses" r"\s+issued;.*of\s+(\d+)\s+licenses\s+in\s+use"
+        r"Users\s+of\s+(.*):.*of\s+(\d+)\s+licenses\s+issued;.*of\s+(\d+)\s+licenses\s+in\s+use"
     )
 
     def __init__(self, parent: Node, pre: str | list[str]) -> None:
         self.pre_execution = pre
         self.parent = parent
         self._tokens: dict[str, tuple[int, int]] = {}
+        if not has_license():
+            raise EnvironmentError(
+                f"No valid Schrodinger license found "
+                f"({SCHRODINGER_LICENSE}={os.environ.get(SCHRODINGER_LICENSE)})"
+            )
         self.query()
 
     @property
@@ -131,8 +146,8 @@ class Schrodinger(Node, register=False):
         raise_on_failure: bool = True,
         command_input: str | None = None,
         pre_execution: str | list[str] | None = None,
-        batch: bool = False,
         batch_options: JobResourceConfig | None = None,
+        timeout: float | None = None
     ) -> CompletedProcess[bytes]:
         if pre_execution is not None:
             if isinstance(pre_execution, str):
@@ -147,6 +162,6 @@ class Schrodinger(Node, register=False):
             raise_on_failure,
             command_input,
             pre_execution,
-            batch,
             batch_options,
+            timeout,
         )
