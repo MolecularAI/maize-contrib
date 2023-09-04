@@ -30,4 +30,4 @@ dependencies:
     - graphviz>=0.20.1
     - nbsphinx>=0.9.1
     - furo>=2023.3.27
-    - git+ssh://git@github.com/molecularai/maize.git
+    - git+ssh://git@github.com/molecularai/maize.git@public
