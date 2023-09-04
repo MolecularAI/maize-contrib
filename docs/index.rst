@@ -35,7 +35,7 @@ maize-contrib
    :maxdepth: 1
    :caption: Core
 
-   Steps <https://molecularai.github.io/maize/steps>
+   Steps <https://molecularai.github.io/maize/docs/steps>
    Maize <https://molecularai.github.io/maize>
 
 Installation

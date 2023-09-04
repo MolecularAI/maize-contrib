@@ -14,7 +14,7 @@ conda activate maize
 pip install -e ./
 ```
 
-The first step will install maize (see the [maize documentation](https://molecularai.github.io/maize/quickstart.html#installation) for more information) and all required dependencies. If you plan on developing, you should use `env-dev.yml` instead.
+The first step will install maize (see the [maize documentation](https://molecularai.github.io/maize/docs/quickstart.html#installation) for more information) and all required dependencies. If you plan on developing, you should use `env-dev.yml` instead.
 
 Usage
 -----
@@ -28,7 +28,7 @@ See the [**documentation**](https://molecularai.github.io/maize-contrib/index.ht
 
 Development
 -----------
-Follow the development guidelines for [maize](https://molecularai.github.io/maize/development.html).
+Follow the development guidelines for [maize](https://molecularai.github.io/maize/docs/development.html).
 
 Because this is a namespace package, some development tools (especially linters) can have problems. I have switched from [pylint](https://pylint.readthedocs.io/en/latest/) to [ruff](https://beta.ruff.rs/docs/) which seems to handle these environments with no problems. For [mypy](https://mypy.readthedocs.io/en/stable/) it is important to specify `MYPY_PATH` and `explicit-package-bases` (see also [this issue](https://github.com/python/mypy/issues/8944)). If you're using VSCode, you will want to point `Pylance` to both the `maize` **and** `maize-contrib` package directories, or it will be unable to find `utilities` subpackages.
 
