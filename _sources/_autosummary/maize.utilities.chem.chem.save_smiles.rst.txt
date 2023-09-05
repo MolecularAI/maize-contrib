@@ -1,0 +1,6 @@
+save\_smiles
+============
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: save_smiles

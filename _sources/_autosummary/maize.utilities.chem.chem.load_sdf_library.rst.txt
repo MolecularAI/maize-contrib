@@ -1,0 +1,6 @@
+load\_sdf\_library
+==================
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: load_sdf_library

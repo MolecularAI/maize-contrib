@@ -1,0 +1,1065 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Custom nodes" href="custom-nodes.html" /><link rel="prev" title="maize-contrib" href="index.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>Docking workflow - maize contrib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(0,56,101);
+  --color-brand-content: rgb(0,56,101);
+  --color-api-name: rgb(60,16,83);
+  --color-api-pre-name: rgb(60,16,83);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">maize contrib</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/maize-contrib-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Docking workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Adding-a-custom-node">Adding a custom node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#High-throughput-docking">High-throughput docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Parallel-docking">Parallel docking</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="custom-nodes.html">Custom nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-workflows.html">Custom workflows</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="steps/docking.html">Docking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steps/molecule.html">Molecule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steps/misc.html">Miscallaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/maize.utilities.chem.html">chem</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of chem</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.html">chem</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of chem</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.convert.html">convert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.load_sdf_library.html">load_sdf_library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.mcs.html">mcs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.merge_libraries.html">merge_libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.result_check.html">result_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.rmsd.html">rmsd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.save_sdf_library.html">save_sdf_library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.save_smiles.html">save_smiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.Conformer.html">Conformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.Isomer.html">Isomer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.IsomerCollection.html">IsomerCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.chem.chem.ChemistryException.html">ChemistryException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize/docs/steps">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize">Maize</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Docking-workflow">
+<h1>Docking workflow<a class="headerlink" href="#Docking-workflow" title="Link to this heading">#</a></h1>
+<p>This is a quick guide to setting up a simple linear workflow for docking small molecules.</p>
+<section id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h2>
+<p>We will first import generally useful stuff - <em>maize</em> uses <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> whenever file system paths are involved:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+<p>The core functionality of <em>maize</em> is contained in the <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> class.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+</pre></div>
+</div>
+</div>
+<p>We will also need some steps that allow us to load and save any kind of data:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span><span class="p">,</span> <span class="n">Return</span><span class="p">,</span> <span class="n">Void</span>
+</pre></div>
+</div>
+</div>
+<p>Domain-specific steps are contained in the <em>maize-contrib</em> namespace package. We will need a docking step (<code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code>) and a step to generate small molecule isomers / conformers (<code class="docutils literal notranslate"><span class="pre">Gypsum</span></code>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.steps.mai.docking.adv</span> <span class="kn">import</span> <span class="n">AutoDockGPU</span>
+<span class="kn">from</span> <span class="nn">maize.steps.mai.molecule</span> <span class="kn">import</span> <span class="n">Gypsum</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.chem</span> <span class="kn">import</span> <span class="n">IsomerCollection</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Preparation">
+<h2>Preparation<a class="headerlink" href="#Preparation" title="Link to this heading">#</a></h2>
+<section id="Configuration">
+<h3>Configuration<a class="headerlink" href="#Configuration" title="Link to this heading">#</a></h3>
+<p>Most available workflow nodes in Maize require some system-specific configuration, such as the location of external software packages, names of modules, or python packages. This configuration takes place in a TOML file, by default Maize looks in <code class="docutils literal notranslate"><span class="pre">$XDG_CONFIG_HOME/maize.toml</span></code> (<code class="docutils literal notranslate"><span class="pre">~/.config/maize.toml</span></code>) for a file like this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>docking-example-config.toml
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+[autodockgpu]
+python = &#34;/projects/mai/users/${USER}_thomas/opt/miniconda3/envs/maize-dev/bin/python&#34;
+modules = [&#34;CUDA&#34;, &#34;GCC&#34;]
+commands.autodock_gpu = &#34;/projects/mai/users/${USER}_thomas/src/AutoDock-GPU/bin/autodock_gpu_64wi&#34;
+
+[gypsum]
+scripts.gypsum.interpreter = &#34;/projects/mai/users/${USER}_thomas/opt/miniconda3/envs/gypsum/bin/python&#34;
+scripts.gypsum.location = &#34;/projects/mai/users/${USER}_thomas/src/gypsum_dl/run_gypsum_dl.py&#34;
+</pre></div></div>
+</div>
+<p>Here, we have configured the <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> node by specifying the python interpreter to be used for its execution, the modules that need to be loaded before, as well as the precise location of the <code class="docutils literal notranslate"><span class="pre">autodock_gpu</span></code> command. We also need this information for <code class="docutils literal notranslate"><span class="pre">Gypsum</span></code> (to embed molecules), but since it’s a script, we provide the script location and interpreter to use separately.</p>
+<p>How to provide this documentation is described in the documentation for each node. They will often have a <code class="docutils literal notranslate"><span class="pre">required_callables</span></code> class attribute specifying the name of the callable to be provided in the configuration. In the above example, <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> requires a callable named <code class="docutils literal notranslate"><span class="pre">autodock_gpu</span></code>, the path to which we can provide using <code class="docutils literal notranslate"><span class="pre">commands.autodock_gpu</span></code>. In other cases the executable might already be in your <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> (or loaded through the module system), in which case no additional
+configuration is required.</p>
+</section>
+<section id="Grid">
+<h3>Grid<a class="headerlink" href="#Grid" title="Link to this heading">#</a></h3>
+<p>We also need to specify the target grid file. <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> requires an <code class="docutils literal notranslate"><span class="pre">.fld</span></code> file with references to a few other files to operate correctly.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../maize/steps/mai/docking/data/1stp/1stp_protein.maps.fld&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Workflow-definition">
+<h2>Workflow definition<a class="headerlink" href="#Workflow-definition" title="Link to this heading">#</a></h2>
+<p>We can now create our workflow instance, give it a name, and possibly specify a logging level. <code class="docutils literal notranslate"><span class="pre">cleanup_temp=False</span></code> allows us to keep all files related to the execution instead of just using temporary directories. We also load our custom configuration because it’s in a non-standard location.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dock&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">cleanup_temp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;docking-example-config.toml&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<section id="Adding-nodes">
+<h3>Adding nodes<a class="headerlink" href="#Adding-nodes" title="Link to this heading">#</a></h3>
+<p>Workflow nodes can be added using the <code class="docutils literal notranslate"><span class="pre">add</span></code> method. We will need a node to load data and inject it into the workflow (<code class="docutils literal notranslate"><span class="pre">LoadData</span></code>), the molecule preparation and docking steps (<code class="docutils literal notranslate"><span class="pre">Gypsum</span></code> and <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code>), and steps to handle the output (<code class="docutils literal notranslate"><span class="pre">Void</span></code> and <code class="docutils literal notranslate"><span class="pre">Return</span></code>).</p>
+<p>Note that steps that accept any kind of generic data should be parameterised with the type. This is the case for <code class="docutils literal notranslate"><span class="pre">LoadData</span></code>, in this case we will be passing it a list of SMILES codes (<code class="docutils literal notranslate"><span class="pre">list[str]</span></code>), and also for <code class="docutils literal notranslate"><span class="pre">Return</span></code>. Doing this allows for all connections to be type-checked statically, catching many workflow construction errors.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span>
+<span class="n">embe</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gypsum</span><span class="p">)</span>
+<span class="n">dock</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">)</span>
+<span class="n">void</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Void</span><span class="p">)</span>
+<span class="n">retu</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>Configuration<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>We can now set the required parameters. <code class="docutils literal notranslate"><span class="pre">LoadData</span></code> requires setting the <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter with the data we want to send on to the next node. We also specify that we want a maximum of 2 variants for the isomer generation / embedding step, and we also need to specify the docking grid:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s2">&quot;Nc1ccc(ccc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C&quot;</span><span class="p">])</span>
+<span class="n">embe</span><span class="o">.</span><span class="n">n_variants</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dock</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Connections">
+<h3>Connections<a class="headerlink" href="#Connections" title="Link to this heading">#</a></h3>
+<p>All that is left to do now is to connect all nodes together:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">embe</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">embe</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">dock</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">retu</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">void</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We can check if everything is ready to run using the <code class="docutils literal notranslate"><span class="pre">check()</span></code> method. It will ensure all nodes in the graph are connected properly (with correct types) and also go through each node’s software requirements, making sure it’s all available:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>If you installed <em>maize</em> with <code class="docutils literal notranslate"><span class="pre">graphviz</span></code> you can visualize the workflow in your notebook:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="_images/docking_24_0.svg" src="_images/docking_24_0.svg" /></div>
+</div>
+</section>
+</section>
+<section id="Running">
+<h2>Running<a class="headerlink" href="#Running" title="Link to this heading">#</a></h2>
+<p>We can now run our graph!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2023-09-05 10:46:50,129 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock |
+              ___           ___                       ___           ___
+             /\__\         /\  \          ___        /\  \         /\  \
+            /::|  |       /::\  \        /\  \       \:\  \       /::\  \
+           /:|:|  |      /:/\:\  \       \:\  \       \:\  \     /:/\:\  \
+          /:/|:|__|__   /::\~\:\  \      /::\__\       \:\  \   /::\~\:\  \
+         /:/ |::::\__\ /:/\:\ \:\__\  __/:/\/__/ _______\:\__\ /:/\:\ \:\__\
+         \/__/~~/:/  / \/__\:\/:/  / /\/:/  /    \::::::::/__/ \:\~\:\ \/__/
+               /:/  /       \::/  /  \::/__/      \:\~~\~~      \:\ \:\__\
+              /:/  /        /:/  /    \:\__\       \:\  \        \:\ \/__/
+             /:/  /        /:/  /      \/__/        \:\__\        \:\__\
+             \/__/         \/__/                     \/__/         \/__/
+
+
+2023-09-05 10:46:50,130 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Starting Maize version 0.4.1 (c) AstraZeneca 2023
+2023-09-05 10:46:51,326 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;loaddata&#39; finished (1/5)
+2023-09-05 10:46:52,144 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;gypsum&#39; finished (2/5)
+2023-09-05 10:46:52,294 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |      autodockgpu | Docking isomer &#39;UPIWLIWRZMYFKW-HTQZYQBONA-N&#39; failed
+2023-09-05 10:46:52,301 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;UPIWLIWRZMYFKW-ITHFDTRPNA-P&#39;, score -3.27
+2023-09-05 10:46:52,341 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;DGRGLKZMKWPMOH-UHFFFAOYNA-N&#39;, score -4.43
+2023-09-05 10:46:52,377 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;return&#39; finished (3/5)
+2023-09-05 10:46:53,383 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;autodockgpu&#39; finished (4/5)
+2023-09-05 10:46:53,853 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;void&#39; finished (5/5)
+2023-09-05 10:46:54,356 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Execution completed :), total runtime: 0:00:03.674147
+        4 nodes completed successfully
+        1 nodes stopped due to closing ports
+        0 nodes failed
+        0:00:09.299583 total walltime
+        0:00:04.741414 spent waiting for resources or other nodes
+</pre></div></div>
+</div>
+</section>
+<section id="Results">
+<h2>Results<a class="headerlink" href="#Results" title="Link to this heading">#</a></h2>
+<p>If all went well you should see a summary of the workflow run in the log above. <code class="docutils literal notranslate"><span class="pre">LogResult</span></code> recorded the docking scores and printed them to the log, but we also have access to the docked conformations through the <code class="docutils literal notranslate"><span class="pre">Return</span></code> node. To access this data, just call <code class="docutils literal notranslate"><span class="pre">get()</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mols</span> <span class="o">=</span> <span class="n">retu</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">mols</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[IsomerCollection(&#39;CC1CC[C@H]([NH3+])[C@@H]([NH3+])CC1&#39;, n_isomers=2),
+ IsomerCollection(&#39;Cc1ccc(N)c(N)c1&#39;, n_isomers=1, best_score=-4.43)]
+</pre></div></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">IsomerCollection</span></code> is a simple container around <code class="docutils literal notranslate"><span class="pre">Isomer</span></code> objects, which in turn are pythonic wrappers around RDKit molecules. These can be accessed using the <code class="docutils literal notranslate"><span class="pre">_molecule</span></code> attribute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_molecule</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table><tr><td colspan="2" style="text-align: center;"><image src="data:image/png;base64,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"></td></tr>
+<tr><th style="text-align: right">UniqueID</th><td style="text-align: left">1</td></tr>
+<tr><th style="text-align: right">SMILES</th><td style="text-align: left">CC1CC[C@@H](N)[C@H](N)CC1</td></tr>
+<tr><th style="text-align: right">Energy</th><td style="text-align: left">35.402799745012786</td></tr>
+<tr><th style="text-align: right">Genealogy</th><td style="text-align: left">CC1CC[C@@H](N)[C@H](N)CC1 (chirality)
+CC1CC[C@@H](N)[C@H](N)CC1 (3D coordinates assigned)
+CC1CC[C@@H](N)[C@H](N)CC1 (nonaromatic ring conformer: 35.402799745012786 kcal/mol)</td></tr>
+<tr><th style="text-align: right">energy</th><td style="text-align: left">[nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan]</td></tr></table></div>
+</div>
+</section>
+</section>
+<section id="Adding-a-custom-node">
+<h1>Adding a custom node<a class="headerlink" href="#Adding-a-custom-node" title="Link to this heading">#</a></h1>
+<p>In the above workflow, we just discarded the docking scores of the molecules and instead used only the docked conformations. Lets create our own node that will log the docked scores. We will first import some required classes to allow us to define our node:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</pre></div>
+</div>
+</div>
+<section id="Defining-nodes">
+<h2>Defining nodes<a class="headerlink" href="#Defining-nodes" title="Link to this heading">#</a></h2>
+<p>We define our custom node by creating a new class inheriting from the node class. Every workflow node must have at least one port (<code class="docutils literal notranslate"><span class="pre">Input</span></code> and / or <code class="docutils literal notranslate"><span class="pre">Output</span></code>) and a <code class="docutils literal notranslate"><span class="pre">run</span></code> method describing the logic. Ports must also declare the correct type, to minimize errors in graph construction.</p>
+<p>In this node, we just receive the scores (a blocking call) and then print them out using the built-in logger.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ScoreLog</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logs scores in the form of NDArrays&quot;&quot;&quot;</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Received scores: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Workflow">
+<h2>Workflow<a class="headerlink" href="#Workflow" title="Link to this heading">#</a></h2>
+<p>We can now build up our workflow as normal, substituting our <code class="docutils literal notranslate"><span class="pre">ScoreLog</span></code> node for the <code class="docutils literal notranslate"><span class="pre">Void</span></code> node:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dock&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">cleanup_temp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;docking-example-config.toml&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span>
+<span class="n">embe</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gypsum</span><span class="p">)</span>
+<span class="n">dock</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">)</span>
+<span class="n">save</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ScoreLog</span><span class="p">)</span>
+<span class="n">retu</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<p>Our new node has no parameters, so everything stays the same here:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s2">&quot;Nc1ccc(ccc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C&quot;</span><span class="p">])</span>
+<span class="n">embe</span><span class="o">.</span><span class="n">n_variants</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dock</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We again connect everything together:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">embe</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">embe</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">dock</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">retu</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">save</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>And check we didn’t make a mistake:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>Running<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Let’s run the new workflow, we should see the scores getting logged by our own node:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2023-09-05 10:46:55,671 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock |
+              ___           ___                       ___           ___
+             /\__\         /\  \          ___        /\  \         /\  \
+            /::|  |       /::\  \        /\  \       \:\  \       /::\  \
+           /:|:|  |      /:/\:\  \       \:\  \       \:\  \     /:/\:\  \
+          /:/|:|__|__   /::\~\:\  \      /::\__\       \:\  \   /::\~\:\  \
+         /:/ |::::\__\ /:/\:\ \:\__\  __/:/\/__/ _______\:\__\ /:/\:\ \:\__\
+         \/__/~~/:/  / \/__\:\/:/  / /\/:/  /    \::::::::/__/ \:\~\:\ \/__/
+               /:/  /       \::/  /  \::/__/      \:\~~\~~      \:\ \:\__\
+              /:/  /        /:/  /    \:\__\       \:\  \        \:\ \/__/
+             /:/  /        /:/  /      \/__/        \:\__\        \:\__\
+             \/__/         \/__/                     \/__/         \/__/
+
+
+2023-09-05 10:46:55,673 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Starting Maize version 0.4.1 (c) AstraZeneca 2023
+2023-09-05 10:46:56,899 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;loaddata&#39; finished (1/5)
+2023-09-05 10:46:57,717 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;gypsum&#39; finished (2/5)
+2023-09-05 10:46:58,259 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;UPIWLIWRZMYFKW-NNELSRSVNA-P&#39;, score -2.7
+2023-09-05 10:46:58,302 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;UPIWLIWRZMYFKW-ITHFDTRPNA-P&#39;, score -3.45
+2023-09-05 10:46:58,328 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;DGRGLKZMKWPMOH-UHFFFAOYNA-N&#39;, score -4.4
+2023-09-05 10:46:58,355 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;return&#39; finished (3/5)
+2023-09-05 10:46:58,887 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;scorelog&#39; finished (4/5)
+2023-09-05 10:46:58,883 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |         scorelog | Received scores: [-3.45 -4.4 ]
+2023-09-05 10:46:59,384 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Node &#39;autodockgpu&#39; finished (5/5)
+2023-09-05 10:46:59,887 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |             dock | Execution completed :), total runtime: 0:00:03.664648
+        5 nodes completed successfully
+        0 nodes stopped due to closing ports
+        0 nodes failed
+        0:00:10.142232 total walltime
+        0:00:08.158412 spent waiting for resources or other nodes
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="High-throughput-docking">
+<h1>High-throughput docking<a class="headerlink" href="#High-throughput-docking" title="Link to this heading">#</a></h1>
+<p>The workflow above is a classic example of a directed acyclic graph (DAG). Each step is effectively run sequentially, which is not a problem for a small number of molecules, but can become a problem for very large amounts, as we might spend a lot of time embedding molecules, while we could already start docking some of them.</p>
+<p>In Maize we can sidestep this problem by batching our data and sending it through the same workflow repeatedly. To do this we will need two generic helper nodes, <code class="docutils literal notranslate"><span class="pre">Batch</span></code> and <code class="docutils literal notranslate"><span class="pre">Combine</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Batch</span><span class="p">,</span> <span class="n">Combine</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">Void</span>
+</pre></div>
+</div>
+</div>
+<section id="id3">
+<h2>Workflow<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>We can now again build our workflow, we will start just like before:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dock-ht&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">cleanup_temp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;docking-example-config.toml&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>We again add all required nodes just like before, as well as the <code class="docutils literal notranslate"><span class="pre">Batch</span></code> and <code class="docutils literal notranslate"><span class="pre">Combine</span></code> nodes. The former will receive a list of items and split it into smaller lists, while the latter will perform the opposite. This will allow us to send smaller batches of SMILES to be docked, allowing molecules to be embedded on the CPU while the previous batch is already docking on the GPU. To make this possible, both <code class="docutils literal notranslate"><span class="pre">Gypsum</span></code> and <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> will need to be able to continuously accept data, we can
+set this option with <code class="docutils literal notranslate"><span class="pre">loop=True</span></code>. We will finally simplify things a bit and just send the docked molecule conformations to a <code class="docutils literal notranslate"><span class="pre">Void</span></code> node, discarding them (equivalent to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>) and only keeping the scores.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span>
+<span class="n">batch</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Batch</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+<span class="n">embe</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gypsum</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dock</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">comb</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Combine</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]])</span>
+<span class="n">save</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+<span class="n">void</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Void</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="id4">
+<h3>Configuration<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>We again configure our workflow as before:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s2">&quot;Nc1ccc(ccc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1cc(F)c(cc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C(F)&quot;</span><span class="p">])</span>
+<span class="n">embe</span><span class="o">.</span><span class="n">n_variants</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dock</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>However, we now also need to set the number of batches to use, and we need to set the same value for both <code class="docutils literal notranslate"><span class="pre">Batch</span></code> and <code class="docutils literal notranslate"><span class="pre">Combine</span></code>. Instead of setting both individually we can combine both parameters into a single one to make the setting less error-prone using <code class="docutils literal notranslate"><span class="pre">combine_parameters</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_batches</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">combine_parameters</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">n_batches</span><span class="p">,</span> <span class="n">comb</span><span class="o">.</span><span class="n">n_batches</span><span class="p">)</span>
+<span class="n">n_batches</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We again connect everything, but this time take a shortcut by using <code class="docutils literal notranslate"><span class="pre">connect_all</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">embe</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">embe</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">dock</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">void</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">comb</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">comb</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">save</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We check everything’s okay and look at the graph structure:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="_images/docking_59_0.svg" src="_images/docking_59_0.svg" /></div>
+</div>
+</section>
+<section id="Run">
+<h3>Run<a class="headerlink" href="#Run" title="Link to this heading">#</a></h3>
+<p>Let’s run it!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2023-09-05 10:47:01,146 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht |
+              ___           ___                       ___           ___
+             /\__\         /\  \          ___        /\  \         /\  \
+            /::|  |       /::\  \        /\  \       \:\  \       /::\  \
+           /:|:|  |      /:/\:\  \       \:\  \       \:\  \     /:/\:\  \
+          /:/|:|__|__   /::\~\:\  \      /::\__\       \:\  \   /::\~\:\  \
+         /:/ |::::\__\ /:/\:\ \:\__\  __/:/\/__/ _______\:\__\ /:/\:\ \:\__\
+         \/__/~~/:/  / \/__\:\/:/  / /\/:/  /    \::::::::/__/ \:\~\:\ \/__/
+               /:/  /       \::/  /  \::/__/      \:\~~\~~      \:\ \:\__\
+              /:/  /        /:/  /    \:\__\       \:\  \        \:\ \/__/
+             /:/  /        /:/  /      \/__/        \:\__\        \:\__\
+             \/__/         \/__/                     \/__/         \/__/
+
+
+2023-09-05 10:47:01,148 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Starting Maize version 0.4.1 (c) AstraZeneca 2023
+2023-09-05 10:47:01,787 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |            batch | Sending batch 0/2
+2023-09-05 10:47:02,289 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;loaddata&#39; finished (1/7)
+2023-09-05 10:47:02,290 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |            batch | Sending batch 1/2
+2023-09-05 10:47:02,793 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;batch&#39; finished (2/7)
+2023-09-05 10:47:03,623 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |      autodockgpu | Docking isomer &#39;UPIWLIWRZMYFKW-YUMQZZPRNA-N&#39; failed
+2023-09-05 10:47:03,627 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |      autodockgpu | Docking isomer &#39;UPIWLIWRZMYFKW-WHUPJOBBNA-N&#39; failed
+2023-09-05 10:47:03,632 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |      autodockgpu | Parsed isomer &#39;DGRGLKZMKWPMOH-UHFFFAOYNA-N&#39;, score -4.43
+2023-09-05 10:47:04,186 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          combine | Received batch 1/2
+2023-09-05 10:47:05,273 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;gypsum&#39; finished (3/7)
+2023-09-05 10:47:05,426 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |      autodockgpu | Docking isomer &#39;SNHYTHIEXHWXCQ-UHFFFAOYNA-N&#39; failed
+2023-09-05 10:47:05,428 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |      autodockgpu | Docking isomer &#39;BLUAPHUUFWSBEL-UHFFFAOYNA-N&#39; failed
+2023-09-05 10:47:05,938 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          combine | Received batch 2/2
+2023-09-05 10:47:05,944 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;logresult&#39; finished (4/7)
+2023-09-05 10:47:05,941 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |        logresult | Received data: &#39;[nan, -4.43, nan, nan]&#39;
+2023-09-05 10:47:06,440 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;autodockgpu&#39; finished (5/7)
+2023-09-05 10:47:06,442 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;combine&#39; finished (6/7)
+2023-09-05 10:47:06,792 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Node &#39;void&#39; finished (7/7)
+2023-09-05 10:47:07,294 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |          dock-ht | Execution completed :), total runtime: 0:00:05.570066
+        4 nodes completed successfully
+        3 nodes stopped due to closing ports
+        0 nodes failed
+        0:00:23.166020 total walltime
+        0:00:13.990148 spent waiting for resources or other nodes
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="Parallel-docking">
+<h1>Parallel docking<a class="headerlink" href="#Parallel-docking" title="Link to this heading">#</a></h1>
+<p>While the above example allowed us to increase our throughput, we can go even further by explicitly parallelizing our workflow. In this case, we will want to run multiple docking runs in parallel, e.g. through a job submission system such as SLURM or just on a machine with multiple GPUs.</p>
+<p>We will use the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> macro as a shortcut for this purpose, it will allow us to run a node in parallel and distribute data across it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.utilities.macros</span> <span class="kn">import</span> <span class="n">parallel</span>
+</pre></div>
+</div>
+</div>
+<section id="id5">
+<h2>Workflow<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>We again setup our workflow as normal:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dock-parallel&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">cleanup_temp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;docking-example-config.toml&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>We can now add our nodes just as in the first example, but we now use the magical <code class="docutils literal notranslate"><span class="pre">parallel</span></code> function to convert our single <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> node into a <em>subgraph</em> containing multiple copies of it. Data will be distributed using a <code class="docutils literal notranslate"><span class="pre">RoundRobin</span></code> node, i.e., one item will be sent to each output at a time, cycling through all available outputs. Outputs will be connected accordingly with a <code class="docutils literal notranslate"><span class="pre">Merge</span></code> node. If more than one output or input is present, multiple <code class="docutils literal notranslate"><span class="pre">RoundRobin</span></code> or <code class="docutils literal notranslate"><span class="pre">Merge</span></code> nodes will
+be used. Finally, we also need to set <code class="docutils literal notranslate"><span class="pre">loop=True</span></code> here to make sure the <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> node can accept multiple rounds of inputs.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span>
+<span class="n">embe</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gypsum</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dock</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parallel</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">,</span> <span class="n">n_branches</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;inp&quot;</span><span class="p">,),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;out_scores&quot;</span><span class="p">),</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">save</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+<span class="n">void</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Void</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="id6">
+<h3>Configuration<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Configuration is done just like before, the embedded molecules will then be distributed over both <code class="docutils literal notranslate"><span class="pre">AutoDockGPU</span></code> nodes.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s2">&quot;Nc1ccc(ccc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1cc(F)c(cc1N)C&quot;</span><span class="p">,</span> <span class="s2">&quot;Nc1ccc(cc1N)C(F)&quot;</span><span class="p">])</span>
+<span class="n">embe</span><span class="o">.</span><span class="n">n_variants</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dock</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We can again connect everything as normal, the internal connections for distribution and merging are taken care of by the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> macro above.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">embe</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">embe</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">dock</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">void</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">save</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s check we’re good to go, and also visualize what is going on inside <code class="docutils literal notranslate"><span class="pre">parallel</span></code>!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="_images/docking_73_0.svg" src="_images/docking_73_0.svg" /></div>
+</div>
+<p>Let’s go! Because my system only has a single GPU we won’t actually see any speed up though (execution is blocked if required resources are not available).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2023-09-05 10:47:08,824 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel |
+              ___           ___                       ___           ___
+             /\__\         /\  \          ___        /\  \         /\  \
+            /::|  |       /::\  \        /\  \       \:\  \       /::\  \
+           /:|:|  |      /:/\:\  \       \:\  \       \:\  \     /:/\:\  \
+          /:/|:|__|__   /::\~\:\  \      /::\__\       \:\  \   /::\~\:\  \
+         /:/ |::::\__\ /:/\:\ \:\__\  __/:/\/__/ _______\:\__\ /:/\:\ \:\__\
+         \/__/~~/:/  / \/__\:\/:/  / /\/:/  /    \::::::::/__/ \:\~\:\ \/__/
+               /:/  /       \::/  /  \::/__/      \:\~~\~~      \:\ \:\__\
+              /:/  /        /:/  /    \:\__\       \:\  \        \:\ \/__/
+             /:/  /        /:/  /      \/__/        \:\__\        \:\__\
+             \/__/         \/__/                     \/__/         \/__/
+
+
+2023-09-05 10:47:08,826 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Starting Maize version 0.4.1 (c) AstraZeneca 2023
+2023-09-05 10:47:09,829 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;loaddata&#39; finished (1/9)
+2023-09-05 10:47:11,065 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;gypsum&#39; finished (2/9)
+2023-09-05 10:47:11,076 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;sow-inp&#39; finished (3/9)
+2023-09-05 10:47:11,208 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;AutoDockGPU-1&#39; finished (4/9)
+2023-09-05 10:47:11,834 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    AutoDockGPU-0 | Parsed isomer &#39;UPIWLIWRZMYFKW-ITHFDTRPNA-P&#39;, score -3.36
+2023-09-05 10:47:11,875 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    AutoDockGPU-0 | Parsed isomer &#39;UPIWLIWRZMYFKW-NNELSRSVNA-P&#39;, score -2.84
+2023-09-05 10:47:11,900 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    AutoDockGPU-0 | Parsed isomer &#39;DGRGLKZMKWPMOH-UHFFFAOYNA-N&#39;, score -4.41
+2023-09-05 10:47:11,920 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |    AutoDockGPU-0 | Docking isomer &#39;SNHYTHIEXHWXCQ-UHFFFAOYNA-N&#39; failed
+2023-09-05 10:47:11,921 | <span class="ansi-yellow-intense-fg ansi-bold"> WARNING</span> |    AutoDockGPU-0 | Docking isomer &#39;BLUAPHUUFWSBEL-UHFFFAOYNA-N&#39; failed
+2023-09-05 10:47:12,962 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;AutoDockGPU-0&#39; finished (5/9)
+2023-09-05 10:47:13,428 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;logresult&#39; finished (6/9)
+2023-09-05 10:47:13,423 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |        logresult | Received data: &#39;[-3.36 -4.41   nan   nan]&#39;
+2023-09-05 10:47:13,784 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;reap-out&#39; finished (7/9)
+2023-09-05 10:47:13,924 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;reap-out_scores&#39; finished (8/9)
+2023-09-05 10:47:14,084 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Node &#39;void&#39; finished (9/9)
+2023-09-05 10:47:14,587 | <span class="ansi-blue-intense-fg ansi-bold">    INFO</span> |    dock-parallel | Execution completed :), total runtime: 0:00:05.175187
+        2 nodes completed successfully
+        7 nodes stopped due to closing ports
+        0 nodes failed
+        0:00:27.012650 total walltime
+        0:00:10.281256 spent waiting for resources or other nodes
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="custom-nodes.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Custom nodes</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI Group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Docking workflow</a><ul>
+<li><a class="reference internal" href="#Imports">Imports</a></li>
+<li><a class="reference internal" href="#Preparation">Preparation</a><ul>
+<li><a class="reference internal" href="#Configuration">Configuration</a></li>
+<li><a class="reference internal" href="#Grid">Grid</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Workflow-definition">Workflow definition</a><ul>
+<li><a class="reference internal" href="#Adding-nodes">Adding nodes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Configuration</a><ul>
+<li><a class="reference internal" href="#Connections">Connections</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Running">Running</a></li>
+<li><a class="reference internal" href="#Results">Results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Adding-a-custom-node">Adding a custom node</a><ul>
+<li><a class="reference internal" href="#Defining-nodes">Defining nodes</a></li>
+<li><a class="reference internal" href="#Workflow">Workflow</a></li>
+<li><a class="reference internal" href="#id2">Running</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#High-throughput-docking">High-throughput docking</a><ul>
+<li><a class="reference internal" href="#id3">Workflow</a><ul>
+<li><a class="reference internal" href="#id4">Configuration</a></li>
+<li><a class="reference internal" href="#Run">Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Parallel-docking">Parallel docking</a><ul>
+<li><a class="reference internal" href="#id5">Workflow</a><ul>
+<li><a class="reference internal" href="#id6">Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=a47416a6"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

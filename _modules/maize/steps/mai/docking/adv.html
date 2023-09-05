@@ -1,0 +1,1307 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../../genindex.html" /><link rel="search" title="Search" href="../../../../../search.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>maize.steps.mai.docking.adv - maize contrib</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(0,56,101);
+  --color-brand-content: rgb(0,56,101);
+  --color-api-name: rgb(60,16,83);
+  --color-api-pre-name: rgb(60,16,83);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../../index.html"><div class="brand">maize contrib</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../../_static/maize-contrib-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docking.html">Docking workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docking.html#Adding-a-custom-node">Adding a custom node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docking.html#High-throughput-docking">High-throughput docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docking.html#Parallel-docking">Parallel docking</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../custom-nodes.html">Custom nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../custom-workflows.html">Custom workflows</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../steps/docking.html">Docking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../steps/molecule.html">Molecule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../steps/misc.html">Miscallaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.html">chem</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of chem</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.html">chem</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of chem</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.convert.html">convert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.load_sdf_library.html">load_sdf_library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.mcs.html">mcs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.merge_libraries.html">merge_libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.result_check.html">result_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.rmsd.html">rmsd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.save_sdf_library.html">save_sdf_library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.save_smiles.html">save_smiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.Conformer.html">Conformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.Isomer.html">Isomer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.IsomerCollection.html">IsomerCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../_autosummary/maize.utilities.chem.chem.ChemistryException.html">ChemistryException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize/docs/steps">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize">Maize</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for maize.steps.mai.docking.adv</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Autodock Vina implementation&quot;&quot;&quot;</span>
+
+<span class="c1"># pylint: disable=import-outside-toplevel, import-error</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Flag</span><span class="p">,</span> <span class="n">FileParameter</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.chem</span> <span class="kn">import</span> <span class="n">Isomer</span><span class="p">,</span> <span class="n">IsomerCollection</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.testing</span> <span class="kn">import</span> <span class="n">TestRig</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.validation</span> <span class="kn">import</span> <span class="n">SuccessValidator</span><span class="p">,</span> <span class="n">FileValidator</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.resources</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+
+<span class="n">AD_HIGH_ENERGY</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">SCORE_ONLY_RESULT_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*Estimated Free Energy of Binding\s*\:\s+(-?\d+\.\d+)\s*&quot;</span><span class="p">)</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_adv_score_parser_meeko</span><span class="p">(</span><span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse scores from Vina output.&quot;&quot;&quot;</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Parsing SDF properties &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;meeko&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))[</span><span class="s2">&quot;free_energy&quot;</span><span class="p">])</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Parsed value &#39;</span><span class="si">%s</span><span class="s2">&#39; from properties&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">_adgpu_score_parser</span><span class="p">(</span>
+    <span class="n">file</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;xml&quot;</span><span class="p">)],</span> <span class="n">log</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;logging.Logger&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse scores from an AutoDockGPU XML output file&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;XML file at &#39;</span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; does not exist&quot;</span><span class="p">)</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">res_section</span> <span class="o">:=</span> <span class="n">tree</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="n">rmsd_section</span> <span class="o">:=</span> <span class="n">res_section</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;rmsd_table&quot;</span><span class="p">)</span>
+    <span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;XML file at &#39;</span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; is malformed or empty&quot;</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">rmsd_section</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Parsing run &#39;</span><span class="si">%s</span><span class="s2">&#39; with energy &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">],</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;binding_energy&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">])]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;binding_energy&quot;</span><span class="p">]),</span>
+            <span class="s2">&quot;cluster_rmsd&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;cluster_rmsd&quot;</span><span class="p">]),</span>
+            <span class="s2">&quot;rmsd&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;reference_rmsd&quot;</span><span class="p">]),</span>
+            <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]),</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">def</span> <span class="nf">_list_of_dicts2dict_of_lists</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert from a list of dictionaries to a dictionary of lists&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">dic</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+
+
+<span class="c1"># Helper functions using meeko to convert to PDBQT...</span>
+<span class="k">def</span> <span class="nf">_mol2pdbqt</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">isomer</span><span class="p">:</span> <span class="s2">&quot;Isomer&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts an isomer to a PDBQT file using meeko&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">meeko</span> <span class="kn">import</span> <span class="n">MoleculePreparation</span>
+
+    <span class="n">preparator</span> <span class="o">=</span> <span class="n">MoleculePreparation</span><span class="p">()</span>
+    <span class="n">preparator</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">isomer</span><span class="o">.</span><span class="n">_molecule</span><span class="p">)</span>
+    <span class="n">preparator</span><span class="o">.</span><span class="n">write_pdbqt_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+
+<span class="c1"># ...and from DLG (a kind of PDBQT file) to SDF</span>
+<span class="k">def</span> <span class="nf">_adv2sdf</span><span class="p">(</span><span class="n">inp_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">sdf</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts an AD DLG file to SDF using meeko&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">meeko</span> <span class="kn">import</span> <span class="n">PDBQTMolecule</span><span class="p">,</span> <span class="n">RDKitMolCreate</span>
+
+    <span class="k">with</span> <span class="n">inp_file</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">inp</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">PDBQTMolecule</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">is_dlg</span><span class="o">=</span><span class="n">inp_file</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.dlg&quot;</span><span class="p">,</span> <span class="n">skip_typing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">sdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sdfout</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">failures</span> <span class="o">=</span> <span class="n">RDKitMolCreate</span><span class="o">.</span><span class="n">write_sd_string</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">sdfout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failures</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Meeko failed to write file &#39;</span><span class="si">{</span><span class="n">sdf</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PreparePDBQT">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.PreparePDBQT">[docs]</a>
+<span class="k">class</span> <span class="nc">PreparePDBQT</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepares a receptor for docking with Vina.&quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;prepare_receptor&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Requires various scripts and tools:</span>
+
+<span class="sd">    prepare_receptor</span>
+<span class="sd">        Included in ``AutoDockTools``.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_RepairType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;bonds_hydrogens&quot;</span><span class="p">,</span> <span class="s2">&quot;bonds&quot;</span><span class="p">,</span> <span class="s2">&quot;hydrogens&quot;</span><span class="p">,</span> <span class="s2">&quot;checkhydrogens&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">]</span>
+    <span class="n">_CleanupType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;nphs&quot;</span><span class="p">,</span> <span class="s2">&quot;lps&quot;</span><span class="p">,</span> <span class="s2">&quot;waters&quot;</span><span class="p">,</span> <span class="s2">&quot;nonstdres&quot;</span><span class="p">,</span> <span class="s2">&quot;deleteAltB&quot;</span><span class="p">]</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;.pdb&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Receptor structure without ligand&quot;&quot;&quot;</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;.pdbqt&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tar archive of all grid files&quot;&quot;&quot;</span>
+
+    <span class="n">repairs</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="n">_RepairType</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Types of repairs to be done to the PDB file&quot;&quot;&quot;</span>
+
+    <span class="n">preserve_charges</span><span class="p">:</span> <span class="n">Flag</span> <span class="o">=</span> <span class="n">Flag</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to preserve existing charges instead of adding Gasteiger charges&quot;&quot;&quot;</span>
+
+    <span class="n">cleanup_protein</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">_CleanupType</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nphs&quot;</span><span class="p">,</span> <span class="s2">&quot;lps&quot;</span><span class="p">,</span> <span class="s2">&quot;waters&quot;</span><span class="p">,</span> <span class="s2">&quot;nonstdres&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleanup options&quot;&quot;&quot;</span>
+
+    <span class="n">remove_nonstd</span><span class="p">:</span> <span class="n">Flag</span> <span class="o">=</span> <span class="n">Flag</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove non-standard residues&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="n">receptor_pdbqt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;rec.pdbqt&quot;</span><span class="p">)</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;prepare_receptor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;-A &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">repairs</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;-U &#39;</span><span class="si">{</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleanup_protein</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;-r </span><span class="si">{</span><span class="n">structure</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;-o </span><span class="si">{</span><span class="n">receptor_pdbqt</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preserve_charges</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">+=</span> <span class="s2">&quot;-C &quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_nonstd</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">+=</span> <span class="s2">&quot;-e &quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileValidator</span><span class="p">(</span><span class="n">receptor_pdbqt</span><span class="p">)],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">receptor_pdbqt</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># TODO Allow anchored / constrained docking, see:</span>
+<span class="c1"># https://github.com/ccsb-scripps/AutoDock-GPU/wiki/Anchored-docking</span>
+<div class="viewcode-block" id="PrepareGrid">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.PrepareGrid">[docs]</a>
+<span class="k">class</span> <span class="nc">PrepareGrid</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepares a receptor for docking with AutoDock4.&quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;prepare_receptor&quot;</span><span class="p">,</span> <span class="s2">&quot;write_gpf&quot;</span><span class="p">,</span> <span class="s2">&quot;autogrid&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Requires various scripts and tools:</span>
+
+<span class="sd">    write_gpf</span>
+<span class="sd">        Script to create GPF output with all possible atomtypes,</span>
+<span class="sd">        `from here &lt;https://github.com/diogomart/write-autogrid-config&gt;`_.</span>
+
+<span class="sd">    prepare_receptor</span>
+<span class="sd">        Included in ``AutoDockTools``.</span>
+
+<span class="sd">    autogrid</span>
+<span class="sd">        Included in the normal CPU-only version of AutoDock</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko`` installed&quot;&quot;&quot;</span>
+
+    <span class="n">inp_structure</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;.pdb&quot;</span><span class="p">,</span> <span class="s2">&quot;.pdbqt&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Receptor structure without ligand&quot;&quot;&quot;</span>
+
+    <span class="n">inp_ligand</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">Isomer</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reference ligand structure, if not provided requires `search_center` to be set&quot;&quot;&quot;</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;tar&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tar archive of all grid files&quot;&quot;&quot;</span>
+
+    <span class="n">search_center</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Center of the search space for docking, required if `inp_ligand` is not given&quot;&quot;&quot;</span>
+
+    <span class="n">search_range</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Range of the search space for docking&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp_structure</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="c1"># Create receptor PDBQT (if needed)</span>
+        <span class="n">receptor_pdbqt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;rec.pdbqt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">structure</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.pdbqt&quot;</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">receptor_pdbqt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;prepare_receptor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;-r </span><span class="si">{</span><span class="n">structure</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;-o </span><span class="si">{</span><span class="n">receptor_pdbqt</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileValidator</span><span class="p">(</span><span class="n">receptor_pdbqt</span><span class="p">)],</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Create temporary ligand PDBQT</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp_ligand</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span>
+            <span class="n">lig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp_ligand</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+            <span class="n">lig_pdbqt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lig.pdbqt&quot;</span><span class="p">)</span>
+            <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">lig_pdbqt</span><span class="p">,</span> <span class="n">lig</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;write_gpf&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;-l </span><span class="si">{</span><span class="n">lig_pdbqt</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">receptor_pdbqt</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_center</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">box_config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;box.txt&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">box_config</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">conf</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">axis</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                    <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_center</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_range</span><span class="o">.</span><span class="n">value</span>
+                <span class="p">):</span>
+                    <span class="n">conf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;center_</span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">coord</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">conf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;size_</span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;write_gpf&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;-b </span><span class="si">{</span><span class="n">box_config</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">receptor_pdbqt</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Create GPF, includes search geometry and index of needed maps</span>
+        <span class="n">gpf</span> <span class="o">=</span> <span class="n">receptor_pdbqt</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.gpf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileValidator</span><span class="p">(</span><span class="n">gpf</span><span class="p">)])</span>
+
+        <span class="c1"># Create maps</span>
+        <span class="n">glg</span> <span class="o">=</span> <span class="n">gpf</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.glg&quot;</span><span class="p">)</span>
+        <span class="n">fld</span> <span class="o">=</span> <span class="n">glg</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.maps.fld&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;autogrid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> -p </span><span class="si">{</span><span class="n">gpf</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> -l </span><span class="si">{</span><span class="n">glg</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileValidator</span><span class="p">(</span><span class="n">glg</span><span class="p">),</span> <span class="n">FileValidator</span><span class="p">(</span><span class="n">fld</span><span class="p">)],</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Wrap it all up</span>
+        <span class="n">tar</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;grid.tar&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tar</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.map&quot;</span><span class="p">):</span>
+                <span class="n">archive</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="p">(</span><span class="n">receptor_pdbqt</span><span class="p">,</span> <span class="n">gpf</span><span class="p">,</span> <span class="n">glg</span><span class="p">,</span> <span class="n">fld</span><span class="p">):</span>
+                <span class="n">archive</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">tar</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AutoDockGPU">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.AutoDockGPU">[docs]</a>
+<span class="k">class</span> <span class="nc">AutoDockGPU</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs AutoDock on the GPU [#santos2021]_.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Clone the repo from `here &lt;https://github.com/ccsb-scripps/AutoDock-GPU&gt;`_,</span>
+<span class="sd">    load modules for the compiler and CUDA, set ``GPU_INCLUDE_PATH`` and</span>
+<span class="sd">    ``GPU_LIBRARY_PATH``, and run ``make DEVICE=CUDA``. This also requires</span>
+<span class="sd">    `meeko &lt;https://github.com/forlilab/Meeko&gt;`_ to convert to and from pdbqt</span>
+<span class="sd">    files, specify `mk_prepare` and `mk_export`.</span>
+
+<span class="sd">    If you get very high docking scores this often means that the ligand is outside</span>
+<span class="sd">    of the grid. This can be due to a map that is too small (increase ``search_range``)</span>
+<span class="sd">    or a misplaced box that is hard to access (modify ``search_center``).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [#santos2021] Santos-Martins, D. et al. Accelerating AutoDock4 with GPUs</span>
+<span class="sd">       and Gradient-Based Local Search. J. Chem. Theory Comput. 17, 1060-1073 (2021).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;autodock_gpu&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires the ``autodock_gpu`` executable&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko==0.4`` installed&quot;&quot;&quot;</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List of molecules to dock, each molecule can have multiple isomers,</span>
+<span class="sd">    these will be docked separately.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Docked molecules with conformations and scores attached. Also</span>
+<span class="sd">    include per-conformer clustering information performed by</span>
+<span class="sd">    AutoDock, use the keys &#39;rmsd&#39;, &#39;cluster_rmsd&#39;, &#39;cluster&#39; to access.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">out_scores</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docking scores, the best for each docked IsomerCollection&quot;&quot;&quot;</span>
+
+    <span class="n">ref_ligand</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="n">Isomer</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optional reference ligand for RMSD analysis&quot;&quot;&quot;</span>
+
+    <span class="n">grid_file</span><span class="p">:</span> <span class="n">FileParameter</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">FileParameter</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The protein grid file, all internally referenced files must be available&quot;&quot;&quot;</span>
+
+    <span class="n">seed</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The default seed&quot;&quot;&quot;</span>
+
+    <span class="n">heuristics</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of evaluations for ligand-based automatic search&quot;&quot;&quot;</span>
+
+    <span class="n">heurmax</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">12000000</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Heuristics evaluation limit&quot;&quot;&quot;</span>
+
+    <span class="n">nrun</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;LGA runs&quot;&quot;&quot;</span>
+
+    <span class="n">population_size</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;LGA population size&quot;&quot;&quot;</span>
+
+    <span class="n">lsit</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Local search iterations&quot;&quot;&quot;</span>
+
+    <span class="n">derivtypes</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Atomtype mappings to add to ``derivtype``, e.g. NA-&gt;N&quot;&quot;&quot;</span>
+
+    <span class="n">strict</span><span class="p">:</span> <span class="n">Flag</span> <span class="o">=</span> <span class="n">Flag</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;When set, raises an exception if docking a molecule failed, otherwise logs a warning&quot;&quot;&quot;</span>
+
+    <span class="n">scores_only</span><span class="p">:</span> <span class="n">Flag</span> <span class="o">=</span> <span class="n">Flag</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If ``True``, will only return the scores and no conformers&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="c1"># Molecule inputs</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
+        <span class="n">inputs</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+        <span class="c1"># Convert all ligands to pdbqt and collect</span>
+        <span class="c1"># their paths and names in a batch file</span>
+        <span class="n">batch_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;batch.txt&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">batch_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+                    <span class="c1"># Tools like REINVENT rely on getting the same number of scores out</span>
+                    <span class="c1"># as molecules, so we can&#39;t filter out failed embeddings earlier...</span>
+                    <span class="k">if</span> <span class="n">isomer</span><span class="o">.</span><span class="n">n_conformers</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                            <span class="s2">&quot;No embedding for &#39;</span><span class="si">%s</span><span class="s2">&#39; (&#39;</span><span class="si">%s</span><span class="s2">&#39;), skipping...&quot;</span><span class="p">,</span>
+                            <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">,</span>
+                            <span class="n">isomer</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(),</span>
+                        <span class="p">)</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">ligand</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">.pdbqt&quot;</span>
+
+                    <span class="c1"># Create pdbqt input</span>
+                    <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">ligand</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+
+                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ligand</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;autodock_gpu&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --filelist </span><span class="si">{</span><span class="n">batch_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--heuristics </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">heuristics</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> --nrun </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nrun</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--psize </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">population_size</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> --lsit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lsit</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--seed </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> --heurmax </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">heurmax</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Possible reference ligand</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_ligand</span><span class="o">.</span><span class="n">is_set</span><span class="p">:</span>
+            <span class="n">ref_ligand</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ref_ligand.pdbqt&quot;</span><span class="p">)</span>
+            <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">ref_ligand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_ligand</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; --xraylfile </span><span class="si">{</span><span class="n">ref_ligand</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Possible derivtypes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivtypes</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">derivtypes</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivtypes</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="n">command</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; --derivtype </span><span class="si">{</span><span class="n">derivtypes</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">validators</span> <span class="o">=</span> <span class="p">[</span><span class="n">SuccessValidator</span><span class="p">(</span><span class="s2">&quot;All jobs ran without errors&quot;</span><span class="p">)]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpus</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="n">validators</span><span class="p">)</span>
+
+        <span class="c1"># Collect outputs</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">score_tag</span> <span class="o">=</span> <span class="s2">&quot;energy&quot;</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">.xml&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Failed dockings and missing embeddings get a NaN</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Isomer scores are in the order of the indices</span>
+                    <span class="n">results</span> <span class="o">=</span> <span class="n">_adgpu_score_parser</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">err</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Docking isomer &#39;</span><span class="si">%s</span><span class="s2">&#39; failed&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">)</span>
+                    <span class="n">isomer</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nrun</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">res_transpose</span> <span class="o">=</span> <span class="n">_list_of_dicts2dict_of_lists</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+                <span class="c1"># High energies indicate grid problems</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ener</span> <span class="o">&gt;</span> <span class="n">AD_HIGH_ENERGY</span> <span class="k">for</span> <span class="n">ener</span> <span class="ow">in</span> <span class="n">res_transpose</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Isomer &#39;</span><span class="si">%s</span><span class="s2">&#39; (&#39;</span><span class="si">%s</span><span class="s2">&#39;) has runs with high energy poses. This indicates &quot;</span>
+                        <span class="s2">&quot;a possible lack of grid coverage or a poorly-defined search space. &quot;</span>
+                        <span class="s2">&quot;Adjust `search_range` and `search_center` during grid preparation.&quot;</span><span class="p">,</span>
+                        <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">,</span>
+                        <span class="n">mol</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                <span class="c1"># Convenience score attribute</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s2">&quot;score_type&quot;</span><span class="p">,</span> <span class="s2">&quot;oracle&quot;</span><span class="p">)</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res_transpose</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Parsed isomer &#39;</span><span class="si">%s</span><span class="s2">&#39;, score </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+                <span class="c1"># We only parse the conformers if the user asks for them,</span>
+                <span class="c1"># otherwise it unnecessarily slows things like REINVENT down</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores_only</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                    <span class="c1"># This allows us to convert all pdbqt outputs</span>
+                    <span class="c1"># into one SDF, with the scoring order</span>
+                    <span class="n">sdf_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">-out.sdf&quot;</span><span class="p">)</span>
+                    <span class="n">_adv2sdf</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.dlg&quot;</span><span class="p">),</span> <span class="n">sdf_out</span><span class="p">)</span>
+
+                    <span class="c1"># Add all conformers and set their coords</span>
+                    <span class="n">isomer</span><span class="o">.</span><span class="n">update_conformers_from_sdf</span><span class="p">(</span><span class="n">sdf_out</span><span class="p">)</span>
+
+                    <span class="c1"># AD gives us lots of useful information for each conformer, e.g. energy</span>
+                    <span class="c1"># reference RMSD and cluster, we tag each conformer with this information</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">res_transpose</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">for</span> <span class="n">conf</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">isomer</span><span class="o">.</span><span class="n">conformers</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
+                            <span class="n">conf</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores_only</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_scores</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">best_score</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]))</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">_Vina</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">register</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base for all Vina variants&quot;&quot;&quot;</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List of molecules to dock&quot;&quot;&quot;</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docked molecules with conformations and scores attached&quot;&quot;&quot;</span>
+
+    <span class="n">seed</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The default seed&quot;&quot;&quot;</span>
+
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">cpu_count</span><span class="p">())</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of docking runs to perform in parallel&quot;&quot;&quot;</span>
+
+    <span class="n">n_poses</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of poses to generate&quot;&quot;&quot;</span>
+
+    <span class="n">receptor</span><span class="p">:</span> <span class="n">FileParameter</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;pdbqt&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">FileParameter</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Path to the receptor structure&quot;&quot;&quot;</span>
+
+    <span class="n">search_center</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Center of the search space for docking&quot;&quot;&quot;</span>
+
+    <span class="n">search_range</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Range of the search space for docking&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="kn">import</span> <span class="nn">meeko</span>
+
+        <span class="k">if</span> <span class="n">meeko</span><span class="o">.</span><span class="n">__version__</span> <span class="o">==</span> <span class="s2">&quot;0.5.0&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;Vina nodes are incompatible with meeko 0.5.0 due &quot;</span>
+                <span class="s2">&quot;to an upstream parsing issue with PDBQT files&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parse_adv_outputs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">],</span> <span class="n">mol_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parses ADV output, including conformers and scores from PDBQT or DLG outputs&quot;&quot;&quot;</span>
+        <span class="n">moldict</span> <span class="o">=</span> <span class="p">{</span><span class="n">iso</span><span class="o">.</span><span class="n">inchi</span><span class="p">:</span> <span class="n">iso</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">for</span> <span class="n">iso</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">}</span>
+        <span class="n">outdict</span> <span class="o">=</span> <span class="p">{</span><span class="n">file</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;_out&quot;</span><span class="p">):</span> <span class="n">file</span> <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">mol_outputs</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">folder</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outdict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="n">isomer</span> <span class="o">=</span> <span class="n">moldict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Parsing isomer </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="n">file</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Docking failed for &#39;</span><span class="si">%s</span><span class="s2">&#39; (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">_adv2sdf</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.sdf&quot;</span><span class="p">))</span>
+            <span class="n">isomer</span><span class="o">.</span><span class="n">update_conformers_from_sdf</span><span class="p">(</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.sdf&quot;</span><span class="p">),</span> <span class="n">score_parser</span><span class="o">=</span><span class="n">_adv_score_parser_meeko</span>
+            <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Vina">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.Vina">[docs]</a>
+<span class="k">class</span> <span class="nc">Vina</span><span class="p">(</span><span class="n">_Vina</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs Vina [#eberhardt2021]_ on a molecule input.</span>
+
+<span class="sd">    The step expects to either find a ``vina`` executable in the ``PATH``,</span>
+<span class="sd">    an appropriate module defined in ``config.toml``, or a module specified</span>
+<span class="sd">    using the :attr:`~maize.core.node.Node.modules` attribute.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [#eberhardt2021] Eberhardt, J., Santos-Martins, D., Tillack, A. F. &amp; Forli, S.</span>
+<span class="sd">       AutoDock Vina 1.2.0: New Docking Methods, Expanded Force Field,</span>
+<span class="sd">       and Python Bindings. J. Chem. Inf. Model. 61, 3891-3898 (2021).</span>
+
+<span class="sd">    .. [#trott2010] Trott, O. &amp; Olson, A. J. AutoDock Vina: Improving the speed and accuracy</span>
+<span class="sd">       of docking with a new scoring function, efficient optimization, and</span>
+<span class="sd">       multithreading. Journal of Computational Chemistry 31, 455-461 (2010).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vina&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires the ``vina`` executable&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko==0.4`` installed&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_center</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_range</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="c1"># Collect all docking commands to be executed, create directories</span>
+        <span class="n">lig_temp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lig-temp.pdbqt&quot;</span><span class="p">)</span>
+        <span class="n">commands</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mol_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+            <span class="n">mol_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mol-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">mol_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+            <span class="n">isomer_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Docking molecule </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;  Docking isomer </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                <span class="n">iso_path</span> <span class="o">=</span> <span class="n">mol_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;isomer-</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">iso_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+                <span class="n">ligand</span> <span class="o">=</span> <span class="n">iso_path</span> <span class="o">/</span> <span class="s2">&quot;input.pdbqt&quot;</span>
+                <span class="n">docked</span> <span class="o">=</span> <span class="n">iso_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">_out.pdbqt&quot;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                    <span class="n">_clean_pdbqt_atomtypes</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">ligand</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Skipping &#39;</span><span class="si">%s</span><span class="s2">&#39; due to PDBQT conversion error:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="p">,</span> <span class="n">err</span>
+                    <span class="p">)</span>
+
+                <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;vina&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --receptor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">receptor</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--ligand </span><span class="si">{</span><span class="n">ligand</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--cpu 1 --seed </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> --out </span><span class="si">{</span><span class="n">docked</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--num_modes </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_poses</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--center_x </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> --center_y </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> --center_z </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--size_x </span><span class="si">{</span><span class="n">dx</span><span class="si">}</span><span class="s2"> --size_y </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2"> --size_z </span><span class="si">{</span><span class="n">dz</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="p">)</span>
+                <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+                <span class="n">isomer_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span>
+            <span class="n">mol_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isomer_outputs</span><span class="p">)</span>
+
+        <span class="c1"># Run all commands at once</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_multi</span><span class="p">(</span>
+            <span class="n">commands</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">raise_on_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Convert each pose to SDF, update isomer conformation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_adv_outputs</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">mol_outputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_clean_pdbqt_atomtypes</span><span class="p">(</span><span class="n">pdbqt_in</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pdbqt_out</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replaces ``G0`` and ``CG0`` atomtypes with normal carbons.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">pdbqt_in</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">inp</span><span class="p">,</span> <span class="n">pdbqt_out</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;(CG0)|(G0)&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">inp</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+
+
+<div class="viewcode-block" id="VinaGPU">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.VinaGPU">[docs]</a>
+<span class="k">class</span> <span class="nc">VinaGPU</span><span class="p">(</span><span class="n">_Vina</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs Vina-GPU [#ding2023]_ on a molecule input.</span>
+
+<span class="sd">    The step expects to either find a ``vina`` executable in the ``PATH``,</span>
+<span class="sd">    an appropriate module defined in ``config.toml``, or a module specified</span>
+<span class="sd">    using the :attr:`~maize.core.node.Node.modules` attribute.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The interface is mostly the same as Vina&#39;s, but requires some additional handling</span>
+<span class="sd">    of the custom compiled kernels, a small change in the commandline parameters, and</span>
+<span class="sd">    allows for docking a directory of ligands at once. The source can be found</span>
+<span class="sd">    `here &lt;https://github.com/DeltaGroupNJUPT/Vina-GPU-2.0&gt;`_. Installation requires</span>
+<span class="sd">    both the *boost* sources and installed headers, and ``-DOPENCL_3_0`` should *not*</span>
+<span class="sd">    be specified (contrary to the official installation instructions).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [#ding2023] Ding, J. et al. Vina-GPU 2.0: Further Accelerating AutoDock Vina</span>
+<span class="sd">       and Its Derivatives with Graphics Processing Units. J. Chem. Inf. Model. (2023)</span>
+<span class="sd">       doi:10.1021/acs.jcim.2c01504.</span>
+
+<span class="sd">    .. [#trott2010] Trott, O. &amp; Olson, A. J. AutoDock Vina: Improving the speed and accuracy</span>
+<span class="sd">       of docking with a new scoring function, efficient optimization, and</span>
+<span class="sd">       multithreading. Journal of Computational Chemistry 31, 455-461 (2010).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vinagpu&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires the ``vinagpu`` executable&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko==0.4`` installed&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="c1"># VinaGPU requires custom built kernels in the same directory,</span>
+        <span class="c1"># so we copy them from the install location</span>
+        <span class="n">kernel_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s2">&quot;vinagpu&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Looking for kernels in &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">kernel_dir</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;Kernel</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_Opt.bin&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">kernel</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                    <span class="s2">&quot;VinaGPU requires the &#39;Kernel_Opt.bin&#39; files to &quot;</span>
+                    <span class="s2">&quot;be present in the Vina-GPU binary folder&quot;</span>
+                <span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span><span class="p">)</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_center</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_range</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="n">lig_temp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lig-temp.pdbqt&quot;</span><span class="p">)</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs&quot;</span><span class="p">)</span>
+        <span class="n">inputs</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+        <span class="n">outputs</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+        <span class="n">mol_docked</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Docking molecule </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+            <span class="n">docked</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;  Docking isomer </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                <span class="n">ligand</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">.pdbqt&quot;</span>
+                <span class="n">docked</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outputs</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">_out.pdbqt&quot;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                    <span class="n">_clean_pdbqt_atomtypes</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">ligand</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Skipping &#39;</span><span class="si">%s</span><span class="s2">&#39; due to PDBQT conversion error:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="p">,</span> <span class="n">err</span>
+                    <span class="p">)</span>
+            <span class="n">mol_docked</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span>
+
+        <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;vinagpu&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --receptor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">receptor</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--ligand_directory </span><span class="si">{</span><span class="n">inputs</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--output_directory </span><span class="si">{</span><span class="n">outputs</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--thread 8000 --seed </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--num_modes </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_poses</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--center_x </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> --center_y </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> --center_z </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;--size_x </span><span class="si">{</span><span class="n">dx</span><span class="si">}</span><span class="s2"> --size_y </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2"> --size_z </span><span class="si">{</span><span class="n">dz</span><span class="si">}</span><span class="s2"> &quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">raise_on_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="c1"># validators=[SuccessValidator(&quot;...done&quot;)],</span>
+        <span class="p">)</span>
+        <span class="c1"># Convert each pose to SDF, update isomer conformation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Docking outputs: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Parsing: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">mol_docked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_adv_outputs</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">mol_docked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QuickVinaGPU">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.QuickVinaGPU">[docs]</a>
+<span class="k">class</span> <span class="nc">QuickVinaGPU</span><span class="p">(</span><span class="n">_Vina</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs QuickVina2 or QuickVina-W for GPUs [#ding2023]_ on a molecule input.</span>
+<span class="sd">    For an overview, see `this &lt;https://qvina.github.io/&gt;`_.</span>
+
+<span class="sd">    The step expects to either find a ``quickvina`` executable in the ``PATH``,</span>
+<span class="sd">    an appropriate module defined in ``config.toml``, or a module specified</span>
+<span class="sd">    using the :attr:`~maize.core.node.Node.modules` attribute.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The interface is mostly the same as Vina&#39;s, but requires some additional handling</span>
+<span class="sd">    of the custom compiled kernels, a small change in the commandline parameters, and</span>
+<span class="sd">    allows for docking a directory of ligands at once. The source can be found</span>
+<span class="sd">    `here &lt;https://github.com/DeltaGroupNJUPT/Vina-GPU-2.0&gt;`_. Installation requires</span>
+<span class="sd">    both the *boost* sources and installed headers, and ``-DOPENCL_3_0`` should *not*</span>
+<span class="sd">    be specified (contrary to the official installation instructions).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [#hassan2017] Hassan, N. M., Alhossary, A. A., Mu, Y. &amp; Kwoh, C.-K.</span>
+<span class="sd">       Protein-Ligand Blind Docking Using QuickVina-W With Inter-Process</span>
+<span class="sd">       Spatio-Temporal Integration. Sci Rep 7, 15451 (2017).</span>
+
+<span class="sd">    .. [#alhossary2015] Alhossary, A., Handoko, S. D., Mu, Y. &amp; Kwoh, C.-K.</span>
+<span class="sd">       Fast, accurate, and reliable molecular docking with QuickVina 2.</span>
+<span class="sd">       Bioinformatics 31, 2214-2216 (2015).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;quickvina&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires the ``quickvina`` executable&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko==0.4`` installed&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_center</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_range</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="c1"># VinaGPU requires custom built kernels in the same directory,</span>
+        <span class="c1"># so we copy them from the install location</span>
+        <span class="n">kernel_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s2">&quot;quickvina&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Looking for kernels in &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">kernel_dir</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">kernel_dir</span> <span class="o">/</span> <span class="s2">&quot;Kernel2_Opt.bin&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="s2">&quot;VinaGPU requires the &#39;Kernel_Opt.bin&#39; files to &quot;</span>
+                <span class="s2">&quot;be present in the Vina-GPU binary folder&quot;</span>
+            <span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">kernel_dir</span> <span class="o">/</span> <span class="s2">&quot;Kernel2_Opt.bin&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span> <span class="o">/</span> <span class="s2">&quot;Kernel2_Opt.bin&quot;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">kernel_dir</span> <span class="o">/</span> <span class="s2">&quot;OpenCL&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span> <span class="o">/</span> <span class="s2">&quot;OpenCL&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Collect all docking commands to be executed, create directories</span>
+        <span class="n">lig_temp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lig-temp.pdbqt&quot;</span><span class="p">)</span>
+        <span class="n">commands</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mol_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+            <span class="n">mol_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mol-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">mol_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+            <span class="n">isomer_outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Docking molecule </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;  Docking isomer </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                <span class="n">iso_path</span> <span class="o">=</span> <span class="n">mol_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;isomer-</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">iso_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+                <span class="n">ligand</span> <span class="o">=</span> <span class="n">iso_path</span> <span class="o">/</span> <span class="s2">&quot;input.pdbqt&quot;</span>
+                <span class="n">docked</span> <span class="o">=</span> <span class="n">iso_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">_out.pdbqt&quot;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                    <span class="n">_clean_pdbqt_atomtypes</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">ligand</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Skipping &#39;</span><span class="si">%s</span><span class="s2">&#39; due to PDBQT conversion error:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="p">,</span> <span class="n">err</span>
+                    <span class="p">)</span>
+
+                <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;quickvina&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --receptor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">receptor</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--ligand </span><span class="si">{</span><span class="n">ligand</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--seed </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> --out </span><span class="si">{</span><span class="n">docked</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--thread 8000 &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--num_modes </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_poses</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--center_x </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> --center_y </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> --center_z </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--size_x </span><span class="si">{</span><span class="n">dx</span><span class="si">}</span><span class="s2"> --size_y </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2"> --size_z </span><span class="si">{</span><span class="n">dz</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="p">)</span>
+                <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+                <span class="n">isomer_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span>
+            <span class="n">mol_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isomer_outputs</span><span class="p">)</span>
+
+        <span class="c1"># Run all commands at once</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_multi</span><span class="p">(</span>
+            <span class="n">commands</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">raise_on_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">SuccessValidator</span><span class="p">(</span><span class="s2">&quot;Writing output&quot;</span><span class="p">)],</span>
+            <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Convert each pose to SDF, update isomer conformation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_adv_outputs</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">mol_outputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="VinaScore">
+<a class="viewcode-back" href="../../../../../steps/docking.html#maize.steps.mai.docking.VinaScore">[docs]</a>
+<span class="k">class</span> <span class="nc">VinaScore</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs Vina scoring [#eberhardt2021]_ on a molecule input.</span>
+
+<span class="sd">    The step expects to either find a ``vina`` executable in the ``PATH``,</span>
+<span class="sd">    an appropriate module defined in ``config.toml``, or a module specified</span>
+<span class="sd">    using the :attr:`~maize.core.node.Node.modules` attribute.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vina&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires the ``vina`` executable&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meeko&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requires a custom environment with ``meeko==0.4`` installed&quot;&quot;&quot;</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List of molecules to dock&quot;&quot;&quot;</span>
+
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IsomerCollection</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Molecules with scores attached.&quot;&quot;&quot;</span>
+
+    <span class="n">out_scores</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docking scores, the best for each docked IsomerCollection&quot;&quot;&quot;</span>
+
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">cpu_count</span><span class="p">())</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of docking runs to perform in parallel&quot;&quot;&quot;</span>
+
+    <span class="n">receptor</span><span class="p">:</span> <span class="n">FileParameter</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Suffix</span><span class="p">(</span><span class="s2">&quot;pdbqt&quot;</span><span class="p">)]]</span> <span class="o">=</span> <span class="n">FileParameter</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Path to the receptor structure&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+
+        <span class="c1"># Collect all docking commands to be executed, create directories</span>
+        <span class="n">lig_temp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lig-temp.pdbqt&quot;</span><span class="p">)</span>
+        <span class="n">commands</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ligands</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Scoring molecule </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;  Scoring isomer </span><span class="si">%s</span><span class="s2">: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                <span class="n">ligand</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="si">}</span><span class="s2">_input.pdbqt&quot;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_mol2pdbqt</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">isomer</span><span class="p">)</span>
+                    <span class="n">_clean_pdbqt_atomtypes</span><span class="p">(</span><span class="n">lig_temp</span><span class="p">,</span> <span class="n">ligand</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Skipping &#39;</span><span class="si">%s</span><span class="s2">&#39; due to PDBQT conversion error:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="p">,</span> <span class="n">err</span>
+                    <span class="p">)</span>
+
+                <span class="n">command</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;vina&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --receptor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">receptor</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;--ligand </span><span class="si">{</span><span class="n">ligand</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span><span class="si">}</span><span class="s2"> --autobox --score_only&quot;</span>
+                <span class="p">)</span>
+                <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+                <span class="n">ligands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">)</span>
+
+        <span class="c1"># Run all commands at once</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_multi</span><span class="p">(</span>
+            <span class="n">commands</span><span class="o">=</span><span class="n">commands</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">raise_on_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">SuccessValidator</span><span class="p">(</span><span class="s2">&quot;Estimated Free Energy&quot;</span><span class="p">)],</span>
+            <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">isomer</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">molecules</span><span class="p">:</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">score_tag</span> <span class="o">=</span> <span class="s2">&quot;energy&quot;</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s2">&quot;score_type&quot;</span><span class="p">,</span> <span class="s2">&quot;oracle&quot;</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+                <span class="k">if</span> <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span> <span class="ow">in</span> <span class="n">ligands</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">match</span> <span class="o">:=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">SCORE_ONLY_RESULT_REGEX</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()):</span>
+                        <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">isomer</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Parsed isomer &#39;</span><span class="si">%s</span><span class="s2">&#39;, score </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">inchi</span><span class="p">,</span> <span class="n">isomer</span><span class="o">.</span><span class="n">scores</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_scores</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">best_score</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># 1UYD previously published with Icolos (IcolosData/molecules/1UYD)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">protein_path</span><span class="p">(</span><span class="n">shared_datadir</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">shared_datadir</span> <span class="o">/</span> <span class="s2">&quot;1UYD_apo.pdb&quot;</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">receptor_path</span><span class="p">(</span><span class="n">shared_datadir</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">shared_datadir</span> <span class="o">/</span> <span class="s2">&quot;1UYD_fixed.pdbqt&quot;</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">ligand_path</span><span class="p">(</span><span class="n">shared_datadir</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">shared_datadir</span> <span class="o">/</span> <span class="s2">&quot;1UYD_ligand.sdf&quot;</span>
+
+
+<span class="c1"># From AD GPU</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">grid_path</span><span class="p">(</span><span class="n">shared_datadir</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">shared_datadir</span> <span class="o">/</span> <span class="s2">&quot;1stp&quot;</span> <span class="o">/</span> <span class="s2">&quot;1stp_protein.maps.fld&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">TestSuiteAutodock</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_PreparePDBQT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">protein_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">PreparePDBQT</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;repairs&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;repairs&quot;</span><span class="p">:</span> <span class="s2">&quot;bonds_hydrogens&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cleanup_protein&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;lps&quot;</span><span class="p">,</span> <span class="s2">&quot;waters&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;remove_nonstd&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;repairs&quot;</span><span class="p">:</span> <span class="s2">&quot;checkhydrogens&quot;</span><span class="p">,</span> <span class="s2">&quot;cleanup_protein&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nphs&quot;</span><span class="p">,</span> <span class="s2">&quot;nonstdres&quot;</span><span class="p">]},</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">protein_path</span><span class="p">]},</span> <span class="n">parameters</span><span class="o">=</span><span class="n">param</span><span class="p">)</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">assert</span> <span class="n">file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">assert</span> <span class="n">file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_AutoDockGPU</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">grid_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ligand_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_sdf</span><span class="p">(</span><span class="n">ligand_path</span><span class="p">)</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="c1"># SMILES from 1UYD data (Icolos)</span>
+        <span class="n">mol_fail</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(F)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol_fail</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;grid_file&quot;</span><span class="p">:</span> <span class="n">grid_path</span><span class="p">,</span> <span class="s2">&quot;derivtypes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;NA&quot;</span><span class="p">:</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;SA&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">}},</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">mol</span><span class="p">,</span> <span class="n">mol_fail</span><span class="p">]]},</span>
+        <span class="p">)</span>
+        <span class="n">docked</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">docked</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scored</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">docked</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scored</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_conformers</span> <span class="o">==</span> <span class="mi">20</span>
+        <span class="k">assert</span> <span class="o">-</span><span class="mf">5.0</span> <span class="o">&lt;</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">best_score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">2.0</span>
+
+    <span class="k">def</span> <span class="nf">test_Vina</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receptor_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test Autodock in isolation&quot;&quot;&quot;</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">Vina</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;search_center&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="mf">24.8</span><span class="p">),</span>
+            <span class="s2">&quot;receptor&quot;</span><span class="p">:</span> <span class="n">receptor_path</span><span class="p">,</span>
+            <span class="s2">&quot;n_poses&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(F)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">mol</span><span class="p">]]})</span>
+        <span class="n">docked</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">docked</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scored</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_conformers</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="o">-</span><span class="mf">11.0</span> <span class="o">&lt;</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">best_score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">7.0</span>
+
+    <span class="k">def</span> <span class="nf">test_QuickVinaGPU</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receptor_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test Autodock in isolation&quot;&quot;&quot;</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">QuickVinaGPU</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;search_center&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="mf">24.8</span><span class="p">),</span>
+            <span class="s2">&quot;receptor&quot;</span><span class="p">:</span> <span class="n">receptor_path</span><span class="p">,</span>
+            <span class="s2">&quot;n_poses&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(F)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">mol</span><span class="p">]]})</span>
+        <span class="n">docked</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">docked</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scored</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_conformers</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="o">-</span><span class="mf">11.0</span> <span class="o">&lt;</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">best_score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">7.0</span>
+
+    <span class="k">def</span> <span class="nf">test_VinaGPU</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receptor_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test Autodock in isolation&quot;&quot;&quot;</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">VinaGPU</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;search_center&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="mf">24.8</span><span class="p">),</span>
+            <span class="s2">&quot;receptor&quot;</span><span class="p">:</span> <span class="n">receptor_path</span><span class="p">,</span>
+            <span class="s2">&quot;n_poses&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(F)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">mol</span><span class="p">]]})</span>
+        <span class="n">docked</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">docked</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scored</span>
+        <span class="k">assert</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_conformers</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="o">-</span><span class="mf">11.0</span> <span class="o">&lt;</span> <span class="n">docked</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">best_score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">7.0</span>
+
+    <span class="k">def</span> <span class="nf">test_VinaScore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_working_dir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receptor_path</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_config</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test Vina in isolation&quot;&quot;&quot;</span>
+        <span class="n">rig</span> <span class="o">=</span> <span class="n">TestRig</span><span class="p">(</span><span class="n">VinaScore</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">test_config</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;receptor&quot;</span><span class="p">:</span> <span class="n">receptor_path</span><span class="p">}</span>
+        <span class="n">mol1</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(F)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol1</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">mol2</span> <span class="o">=</span> <span class="n">IsomerCollection</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">&quot;Nc1nc(Cl)nc(c12)n(CCCC)c(n2)Cc3cc(OC)ccc3OC&quot;</span><span class="p">)</span>
+        <span class="n">mol2</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rig</span><span class="o">.</span><span class="n">setup_run</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;inp&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">]]})</span>
+        <span class="n">docked</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">docked</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">docked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">dock</span><span class="o">.</span><span class="n">scored</span> <span class="k">for</span> <span class="n">dock</span> <span class="ow">in</span> <span class="n">docked</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;out_scores&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">scores</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI Group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

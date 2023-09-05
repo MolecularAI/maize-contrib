@@ -1,0 +1,41 @@
+IsomerCollection
+================
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autoclass:: IsomerCollection
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IsomerCollection.__init__
+      ~IsomerCollection.embed
+      ~IsomerCollection.from_sdf
+      ~IsomerCollection.from_smiles
+      ~IsomerCollection.remove_isomer
+      ~IsomerCollection.to_sdf
+      ~IsomerCollection.to_smiles
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IsomerCollection.best_score
+      ~IsomerCollection.inchi
+      ~IsomerCollection.n_isomers
+      ~IsomerCollection.scored
+      ~IsomerCollection.smiles
+   
+   

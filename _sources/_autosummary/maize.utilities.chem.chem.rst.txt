@@ -1,0 +1,56 @@
+chem
+====
+
+.. automodule:: maize.utilities.chem.chem
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      convert
+      load_sdf_library
+      mcs
+      merge_libraries
+      result_check
+      rmsd
+      save_sdf_library
+      save_smiles
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      Conformer
+      Isomer
+      IsomerCollection
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      ChemistryException
+   
+   
+
+
+

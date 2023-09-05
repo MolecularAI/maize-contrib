@@ -1,0 +1,63 @@
+Isomer
+======
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autoclass:: Isomer
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Isomer.__init__
+      ~Isomer.add_conformer
+      ~Isomer.addh
+      ~Isomer.atommap
+      ~Isomer.clear_conformers
+      ~Isomer.embed
+      ~Isomer.from_rdmols
+      ~Isomer.from_sdf
+      ~Isomer.from_sdf_block
+      ~Isomer.from_smiles
+      ~Isomer.generate_stereoisomers
+      ~Isomer.get_atomic_tag
+      ~Isomer.get_tag
+      ~Isomer.has_atomic_tag
+      ~Isomer.has_tag
+      ~Isomer.remove_conformer
+      ~Isomer.set_atomic_tag
+      ~Isomer.set_tag
+      ~Isomer.to_mol_block
+      ~Isomer.to_pdb
+      ~Isomer.to_sdf
+      ~Isomer.to_smiles
+      ~Isomer.update_conformers_from_mol_block
+      ~Isomer.update_conformers_from_sdf
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Isomer.charge
+      ~Isomer.conformers
+      ~Isomer.coordinates
+      ~Isomer.inchi
+      ~Isomer.n_atoms
+      ~Isomer.n_conformers
+      ~Isomer.name
+      ~Isomer.scored
+      ~Isomer.scores
+      ~Isomer.tags
+   
+   

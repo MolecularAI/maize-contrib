@@ -1,0 +1,6 @@
+convert
+=======
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: convert

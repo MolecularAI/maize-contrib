@@ -1,0 +1,32 @@
+﻿chem
+====
+
+.. automodule:: maize.utilities.chem
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module.rst
+   :recursive:
+
+   maize.utilities.chem.chem
+

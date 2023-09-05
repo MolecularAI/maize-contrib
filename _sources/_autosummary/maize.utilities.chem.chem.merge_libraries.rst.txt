@@ -1,0 +1,6 @@
+merge\_libraries
+================
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: merge_libraries

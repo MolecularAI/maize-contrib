@@ -1,0 +1,6 @@
+rmsd
+====
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: rmsd

@@ -1,0 +1,6 @@
+result\_check
+=============
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autofunction:: result_check

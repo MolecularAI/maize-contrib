@@ -1,0 +1,6 @@
+ChemistryException
+==================
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autoexception:: ChemistryException

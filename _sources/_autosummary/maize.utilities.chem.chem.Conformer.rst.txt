@@ -1,0 +1,38 @@
+Conformer
+=========
+
+.. currentmodule:: maize.utilities.chem.chem
+
+.. autoclass:: Conformer
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Conformer.__init__
+      ~Conformer.from_rdmol
+      ~Conformer.get_tag
+      ~Conformer.has_tag
+      ~Conformer.regenerate
+      ~Conformer.set_tag
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Conformer.coordinates
+      ~Conformer.n_atoms
+      ~Conformer.tags
+   
+   
