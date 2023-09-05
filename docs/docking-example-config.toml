@@ -1,9 +1,9 @@
 
 [autodockgpu]
-python = "/home/${USER}/miniconda3/envs/maize-meeko/bin/python"
+python = "/projects/mai/users/${USER}_thomas/opt/miniconda3/envs/maize-dev/bin/python"
 modules = ["CUDA", "GCC"]
 commands.autodock_gpu = "/projects/mai/users/${USER}_thomas/src/AutoDock-GPU/bin/autodock_gpu_64wi" 
 
 [gypsum]
-scripts.gypsum.interpreter = "/home/${USER}/miniconda3/envs/gypsum/bin/python"
+scripts.gypsum.interpreter = "/projects/mai/users/${USER}_thomas/opt/miniconda3/envs/gypsum/bin/python"
 scripts.gypsum.location = "/projects/mai/users/${USER}_thomas/src/gypsum_dl/run_gypsum_dl.py"
