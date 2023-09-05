@@ -18,7 +18,6 @@ from numpy.typing import NDArray
 from maize.core.node import Node
 from maize.core.workflow import Workflow
 from maize.core.interface import Input, Output, Parameter, FileParameter, Suffix, Flag
-from maize.steps.io import LoadData, Return
 from maize.utilities.chem import IsomerCollection
 from maize.utilities.execution import CommandRunner
 from maize.utilities.testing import TestRig
@@ -68,6 +67,7 @@ def expose_reinvent(graph_type: type["Graph"]) -> Callable[[], None]:
         Runnable workflow
 
     """
+    from maize.steps.io import LoadData, Return
 
     def wrapped() -> None:
         flow = Workflow()
