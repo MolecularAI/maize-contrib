@@ -1,0 +1,88 @@
+# GNINA
+# =====
+#
+# Runs docking with GNINA and additionally calculates the RMSD to a reference pose
+
+name: gnina
+
+nodes:
+- name: loadlibrary
+  type: LoadLibrary
+- name: loadmolecule
+  type: LoadMolecule
+- name: copy
+  type: Copy
+- name: gnina
+  type: GNINA
+- name: posestability
+  type: PoseStability
+- name: rmsd
+  type: RMSD
+- name: savesinglelibrary
+  type: SaveSingleLibrary
+
+channels:
+- sending:
+    loadlibrary: out
+  receiving:
+    gnina: inp
+- sending:
+    loadmolecule: out
+  receiving:
+    copy: inp
+- sending:
+    copy: out
+  receiving:
+    rmsd: inp_ref
+- sending:
+    copy: out
+  receiving:
+    gnina: inp_ref
+- sending:
+    gnina: out
+  receiving:
+    rmsd: inp
+- sending:
+    rmsd: out
+  receiving:
+    posestability: inp
+- sending:
+    posestability: out
+  receiving:
+    savesinglelibrary: inp
+
+parameters:
+
+# MANDATORY: SDF file input
+- name: input
+  map:
+  - loadlibrary: path
+
+# MANDATORY: SDF file output
+- name: output
+  map:
+  - savesinglelibrary: file
+
+# MANDATORY: Receptor PDB file
+- name: receptor
+  map:
+  - gnina: receptor
+  - posestability: receptor
+
+# OPTIONAL: reference molecule
+- name: reference
+  optional: true
+  map:
+  - loadmolecule: path
+
+# OPTIONAL: What kind of CNN scoring to use
+- name: cnn_scoring
+  value: rescore
+  map:
+  - gnina: cnn_scoring
+
+# OPTIONAL: Number of MC chains for pose search
+- name: exhaustiveness
+  value: 8
+  map:
+  - gnina: exhaustiveness

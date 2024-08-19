@@ -1,0 +1,155 @@
+# GNINA (multiple)
+# ================
+#
+# Runs GNINA 3 times to acquire statistics
+
+name: gnina-multi
+
+nodes:
+- name: loadlibrary
+  type: LoadLibrary
+- name: loadmolecule
+  type: LoadMolecule
+- name: copy
+  type: Copy
+- name: copy-ref
+  type: Copy
+- name: combinemolecules
+  type: CombineMolecules
+- name: savesinglelibrary
+  type: SaveSingleLibrary
+- name: dock-0
+  type: GNINA
+- name: rmsd-0
+  type: RMSD
+- name: dock-1
+  type: GNINA
+- name: rmsd-1
+  type: RMSD
+- name: dock-2
+  type: GNINA
+- name: rmsd-2
+  type: RMSD
+
+channels:
+- sending:
+    copy: out
+  receiving:
+    dock-0: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-0: inp_ref
+- sending:
+    copy-ref: out
+  receiving:
+    rmsd-0: inp_ref
+- sending:
+    dock-0: out
+  receiving:
+    rmsd-0: inp
+- sending:
+    rmsd-0: out
+  receiving:
+    combinemolecules: inp
+- sending:
+    copy: out
+  receiving:
+    dock-1: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-1: inp_ref
+- sending:
+    copy-ref: out
+  receiving:
+    rmsd-1: inp_ref
+- sending:
+    dock-1: out
+  receiving:
+    rmsd-1: inp
+- sending:
+    rmsd-1: out
+  receiving:
+    combinemolecules: inp
+- sending:
+    copy: out
+  receiving:
+    dock-2: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-2: inp_ref
+- sending:
+    copy-ref: out
+  receiving:
+    rmsd-2: inp_ref
+- sending:
+    dock-2: out
+  receiving:
+    rmsd-2: inp
+- sending:
+    rmsd-2: out
+  receiving:
+    combinemolecules: inp
+- sending:
+    loadlibrary: out
+  receiving:
+    copy: inp
+- sending:
+    loadmolecule: out
+  receiving:
+    copy-ref: inp
+- sending:
+    combinemolecules: out
+  receiving:
+    savesinglelibrary: inp
+
+parameters:
+
+# MANDATORY: SDF file input
+- name: input
+  map:
+  - loadlibrary: path
+
+# MANDATORY: SDF file output
+- name: output
+  map:
+  - savesinglelibrary: file
+
+# MANDATORY: Receptor PDB file
+- name: receptor
+  map:
+  - dock-0: receptor
+  - dock-1: receptor
+  - dock-2: receptor
+
+# OPTIONAL: Reference molecule
+- name: reference
+  optional: true
+  map:
+  - loadmolecule: path
+
+# OPTIONAL: Number of MC chains for pose search
+- name: exhaustiveness
+  value: 8
+  map:
+  - dock-0: exhaustiveness
+  - dock-1: exhaustiveness
+  - dock-2: exhaustiveness
+
+# OPTIONAL: What kind of CNN scoring to use
+- name: cnn_scoring
+  value: rescore
+  map:
+  - dock-0: cnn_scoring
+  - dock-1: cnn_scoring
+  - dock-2: cnn_scoring
+
+# OPTIONAL: Number of CPUs to use per branch
+- name: n_jobs
+  value: 2
+  map:
+  - dock-0: n_jobs
+  - dock-1: n_jobs
+  - dock-2: n_jobs

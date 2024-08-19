@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maize-contrib"
+description = "Custom maize nodes and subgraphs"
+version = "0.5.5"
+authors = [{name = "AstraZeneca"}]
+maintainers = [{name = "Thomas Löhr", email = "thomas.lohr@astrazeneca.com"}]
+requires-python = ">=3.10"
+dependencies = [
+    "maize>=0.6.0",
+    "rdkit>=2022.9.5",
+    "pandas>=2.0.0",
+]
+
+[project.optional-dependencies]
+dock = ["meeko==0.4.0", "scipy>=1.11.2"]
+
+[project.scripts]
+dock = "maize.graphs.mai.dock:dock"
+dock_gpu = "maize.graphs.mai.dock:dock_gpu"
+dock_single = "maize.graphs.mai.dock:dock_single"
+dock_multi = "maize.graphs.mai.dock:dock_multi"
+dock_glide = "maize.graphs.mai.dock:dock_glide"
+score_only = "maize.graphs.mai.dock:score_only"
+prepare_grid = "maize.graphs.mai.dock:prepare_grid"
+prepare_pdbqt = "maize.graphs.mai.dock:prepare_pdbqt"
+openfe_rbfe = "maize.graphs.mai.fe:openfe_rbfe"
+
+# Not quite sure why this is required (rather than listing the packages explicitly),
+# but without this will only install using --editable, see also:
+# https://stackoverflow.com/questions/43430852/import-only-works-when-module-installed-using-editable-pip-flag
+[tool.setuptools.packages.find]
+include = ["maize*"]
+
+[tool.setuptools.package-data]
+"*" = ["../maize.toml"]
+
+[tool.pytest.ini_options]
+config = "test-config.toml"
+log_cli = true
+log_cli_level = "DEBUG"
+addopts = ["-vv"]
+python_files = ["*.py"]
+python_classes = ["TestSuite*"]
+testpaths = [
+    "maize/steps",
+    "tests",
+]
+
+[tool.mypy]
+follow_imports = "silent"
+ignore_missing_imports = true
+strict = true
+explicit_package_bases = true
+namespace_packages = true
+
+# There's currently an error in the rdkit stubs causing a full mypy run to fail:
+# rdkit-stubs/Chem/rdMolDescriptors.pyi:185: error: Duplicate argument "self" in function definition
+[[tool.mypy.overrides]]
+module = ["rdkit.Chem.*"]
+follow_imports = "skip"
+follow_imports_for_stubs = true
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100

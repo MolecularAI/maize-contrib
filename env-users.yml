@@ -1,0 +1,30 @@
+name: maize
+channels:
+  - conda-forge
+  - rdkit
+  - defaults
+dependencies:
+  - python=3.10
+  - toml>=0.10.2
+  - yaml>=0.2.5
+  - dill>=0.3.6
+  - networkx>=3.1
+  - numpy>=1.24.3, <2.0
+  - scipy>=1.11.2
+  - matplotlib>=3.7.1
+  - pytest>=7.3.1
+  - pytest-datadir>=1.4.1
+  - pytest-mock>=3.10.0
+  - mypy>=1.2.0, <1.7
+  - graphviz>=8.0.3
+  - beartype>=0.13.1
+  - rdkit>=2022.9.5
+  - openbabel>=3.1.1
+  - pandas>=2.0.0
+  - pip>=20.0
+  - pip:
+    - meeko>=0.5.0
+    - git+https://github.com/ExaWorks/psij-python.git@9e1a777
+    - graphviz>=0.20.1
+    - pyyaml>=0.2.5
+    - maize-0.8.3-py3-none-any.whl

@@ -1,0 +1,183 @@
+# GNINA-AL
+# ========
+#
+# Runs GNINA with active learning (optional) through a REINVENT interface
+
+name: gnina-al
+
+nodes:
+- name: reinvententry
+  type: ReinventEntry
+- name: stripepoch
+  type: StripEpoch
+- name: smiles2molecules
+  type: Smiles2Molecules
+- name: activelearningsingle
+  parameters:
+    epochs: [0, 1, -1]
+    aggregation: max
+  type: ActiveLearningSingle
+- name: log
+  parameters:
+    save_epochs: true
+  type: ActiveLearningProgressSingle
+- name: epsilongreedy
+  type: EpsilonGreedy
+- name: gnina
+  type: GNINA
+- name: setscoretag
+  type: SetScoreTag
+  parameters:
+    tag: CNNaffinity
+    agg: max
+- name: setprimaryscore
+  type: SetPrimaryScore
+  parameters:
+    tag: CNNaffinity
+- name: ref
+  type: LoadMolecule
+- name: reinventexit
+  type: ReinventExit
+
+channels:
+- receiving:
+    smiles2molecules: inp
+  sending:
+    reinvententry: out
+- receiving:
+    stripepoch: inp
+  sending:
+    reinvententry: out_metadata
+- receiving:
+    activelearningsingle:
+      map: inp
+  sending:
+    stripepoch: out
+- receiving:
+    activelearningsingle:
+      tagindex: inp
+  sending:
+    smiles2molecules: out
+- receiving:
+    log: inp
+  sending:
+    activelearningsingle:
+      merge-all: out
+- receiving:
+    reinventexit: inp
+  sending:
+    log: out
+- receiving:
+    gnina: inp
+  sending:
+    activelearningsingle:
+      filecachedmol: out_calc
+- receiving:
+    epsilongreedy: inp
+  sending:
+    activelearningsingle:
+      qptunapredict: out
+- receiving:
+    activelearningsingle:
+      multiplex: inp
+  sending:
+    epsilongreedy: out_oracle
+- receiving:
+    activelearningsingle:
+      al:
+        merge-all: inp
+  sending:
+    epsilongreedy: out_surrogate
+- receiving:
+    activelearningsingle:
+      filecachedmol: inp_calc
+  sending:
+    setprimaryscore: out
+- receiving:
+    setprimaryscore: inp
+  sending:
+    setscoretag: out
+- receiving:
+    setscoretag: inp
+  sending:
+    gnina: out
+- receiving:
+    gnina: inp_ref
+  sending:
+    ref: out
+
+parameters:
+
+# DO NOT TOUCH: This is the required input parameter
+- map:
+  - reinvententry: data
+  name: inp
+
+# DO NOT TOUCH: JSON output for REINVENT
+- map:
+  - reinventexit: data
+  name: out
+
+# MANDATORY: Receptor to use for docking
+- map:
+  - gnina: receptor
+  name: receptor
+
+# MANDATORY: Active learning configuration for Qptuna
+- map:
+  - activelearningsingle: proxy_config
+  name: proxy_config
+
+# OPTIONAL: Search center (if reference not set)
+- name: search_center
+  optional: true
+  map:
+  - gnina: search_center
+
+# OPTIONAL: Reference ligand (if search_center not set)
+- map:
+  - ref: path
+  optional: true
+  name: ref
+
+# DO NOT TOUCH: Temporary files for active learning
+- map:
+  - activelearningsingle: proxy_model
+  name: proxy_model
+  value: temp/model.pkl
+- map:
+  - activelearningsingle: proxy_pool
+  name: proxy_pool
+  value: temp/pool.csv
+- map:
+  - activelearningsingle: proxy_build
+  name: proxy_build
+  value: temp/build.json
+- map:
+  - activelearningsingle: cache
+  name: cache
+  value: temp/cache.pkl
+
+# OPTIONAL: Maximum number of molecules to use for retraining the surrogate model
+- map:
+  - activelearningsingle: n_train
+  name: n_train
+  value: 1024
+
+# OPTIONAL: Number of molecules to send to the oracle, must be smaller than REINVENT batch size
+- map:
+  - epsilongreedy: n_oracle
+  name: n_oracle
+  value: 32
+
+# OPTIONAL: Proportion of random as opposed to greedy selection
+- map:
+  - epsilongreedy: epsilon
+  name: epsilon
+  value: 0.2
+
+# OPTIONAL: Location to save epoch information
+- map:
+  - log: save_location
+  name: save_location
+  value: dumps
