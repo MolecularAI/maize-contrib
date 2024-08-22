@@ -111,6 +111,9 @@ class Glide(Schrodinger):
     ref_ligand: Input[Isomer] = Input(optional=True)
     """Optional reference ligand"""
 
+    ref_shape: Input[Annotated[Path, Suffix("shape.maegz")]] = Input(optional=True)
+    """Optional shape reference"""
+
     out: Output[list[IsomerCollection]] = Output()
     """Docked molecules with poses and energies included"""
 
@@ -174,6 +177,13 @@ class Glide(Schrodinger):
             config["CORE_RESTRAIN"] = self.core_restrain.value
             if "CORE_DEFINITION" not in self.keywords.value.keys():
                 config["CORE_DEFINITION"] = self.core_definition.value
+
+        # Optional shape reference
+        shape = self.ref_shape.receive_optional()
+        if shape:
+            self.logger.info("Using shape reference '%s'", shape.abspath())
+            config["SHAPE_REF_LIGAND_FILE"] = shape.as_posix()
+            config["SHAPE_RESTRAIN"] = True
 
         for i, mol in enumerate(mols):
             for j, iso in enumerate(mol.molecules):
