@@ -1,0 +1,127 @@
+# GLIDE
+# =====
+#
+# Runs docking with Glide (with a REINVENT interface)
+
+name: glide
+
+nodes:
+- name: smiles
+  type: ReinventEntry
+- name: dock
+  type: GlideDocking
+- name: rnv
+  type: ReinventExit
+- name: void
+  type: Void
+- name: isocopy
+  type: Copy
+- name: bestisomerfilter
+  type: BestIsomerFilter
+- name: tagfilter
+  type: TagFilter
+  parameters:
+    must_have_tags: ["r_i_docking_score"]
+- name: conffilter
+  type: BestConformerFilter
+- name: saveligs
+  type: SaveSingleLibrary
+
+channels:
+- sending:
+    smiles: out
+  receiving:
+    dock: inp
+- sending:
+    dock: out
+  receiving:
+    isocopy: inp
+- sending:
+    isocopy: out
+  receiving:
+    rnv: inp
+- sending:
+    isocopy: out
+  receiving:
+    bestisomerfilter: inp
+- sending:
+    bestisomerfilter: out
+  receiving:
+    tagfilter: inp
+- sending:
+    tagfilter: out
+  receiving:
+    conffilter: inp
+- sending:
+    conffilter: out
+  receiving:
+    saveligs: inp
+- sending:
+    smiles: out_metadata
+  receiving:
+    void: inp
+
+parameters:
+
+# DO NOT TOUCH: This is the required input parameter
+- name: inp
+  map:
+  - smiles: data
+
+# DO NOT TOUCH: JSON output for REINVENT
+- name: out
+  map:
+  - rnv: data
+
+# MANDATORY: Receptor to use for docking
+- name: inp_grid
+  map:
+  - dock: inp_grid
+
+# OPTIONAL: Reference ligand
+- name: reference
+  optional: true
+  map:
+  - dock: reference_ligand_file
+
+# OPTIONAL: Constraints
+- name: constraints
+  map:
+  - dock: constraints
+
+# OPTIONAL: Where to save output poses (if save_poses is True)
+- name: save_location
+  value: saved_ligands.sdf
+  map:
+  - saveligs: file
+
+# OPTIONAL: Extra Glide keywords
+- name: keywords
+  map:
+  - dock: keywords
+
+# OPTIONAL: The maximum score to use for failed compounds
+- name: max_score
+  value: 0.0
+  map:
+  - dock: max_score
+
+# OPTIONAL: Whether to save output poses
+- name: save_poses
+  map:
+  - saveligs: active
+
+# OPTIONAL: Host to run on
+- name: host
+  map:
+  - dock: host
+
+# OPTIONAL: Number of jobs
+- name: n_jobs
+  map:
+  - dock: n_jobs
+
+# OPTIONAL: Job server query interval, should be increased for very large jobs
+- name: query_interval
+  map:
+  - dock: query_interval

@@ -1,0 +1,14 @@
+
+[autodockgpu]
+python = "/projects/mai/users/${USER}_thomas/opt/miniconda3/envs/maize-dev/bin/python"
+modules = ["CUDA", "GCC"]
+
+[xtb]
+commands.xtb = "/projects/mai/users/${USER}_michele/anaconda3/envs/maize/bin/xtb"
+
+[crest]
+commands.crest = "/projects/mai/users/${USER}_michele/anaconda3/envs/maize/bin/crest"
+
+[gaussian]
+modules = ["gaussian"]
+commands.gaussian = "/path/to/executable/gaussian/16.C.02-avx2-gaussview-6.1.1/g16/g16"

@@ -1,0 +1,54 @@
+# REINVENT-Maize interface example
+#
+# Usage:
+# maize flow.yml --smiles input.json --output out.json --receptor path/to/pdbqt --center 3.3 11.5 24.8
+#
+# input.json:
+#
+# {
+#     "smiles": ["CCO", "CCF"],
+#     "metadata": {"iteration": 0}
+# }
+
+name: Docking
+level: INFO
+
+nodes:
+- name: smiles
+  type: ReinventEntry
+- name: dock
+  type: Docking
+- name: rnv
+  type: ReinventExit
+
+# ReinventEntry can output optional metadata, if it's not required in can be sent to a Void node
+- name: void
+  type: Void
+
+channels:
+- sending:
+    smiles: out
+  receiving:
+    dock: inp
+- sending:
+    dock: out
+  receiving:
+    rnv: inp
+- sending:
+    smiles: out_metadata
+  receiving:
+    void: inp
+
+parameters:
+- name: smiles
+  map:
+  - smiles: data
+- name: receptor
+  map:
+  - dock: receptor
+- name: center
+  map:
+  - dock: search_center
+- name: output
+  map:
+  - rnv: data

@@ -1,0 +1,116 @@
+# GNINA
+# =====
+#
+# Runs docking with GNINA (with a REINVENT interface)
+
+name: gnina
+
+nodes:
+- name: smiles
+  type: ReinventEntry
+- name: embed
+  type: Smiles2Molecules
+- name: dock
+  type: GNINA
+- name: rnv
+  type: ReinventExit
+- name: void
+  type: Void
+- name: ref
+  type: LoadMolecule
+- name: isocopy
+  type: Copy
+- name: bestisomerfilter
+  type: BestIsomerFilter
+- name: saveligs
+  type: SaveSingleLibrary
+
+channels:
+- sending:
+    smiles: out
+  receiving:
+    embed: inp
+- sending:
+    embed: out
+  receiving:
+    dock: inp
+- sending:
+    dock: out
+  receiving:
+    isocopy: inp
+- sending:
+    isocopy: out
+  receiving:
+    rnv: inp
+- sending:
+    isocopy: out
+  receiving:
+    bestisomerfilter: inp
+- sending:
+    bestisomerfilter: out
+  receiving:
+    saveligs: inp
+- sending:
+    smiles: out_metadata
+  receiving:
+    void: inp
+- sending:
+    ref: out
+  receiving:
+    dock: inp_ref
+
+parameters:
+
+# DO NOT TOUCH: This is the required input parameter
+- name: inp
+  map:
+  - smiles: data
+
+# DO NOT TOUCH: JSON output for REINVENT
+- name: out
+  map:
+  - rnv: data
+
+# MANDATORY: Receptor to use for docking
+- name: inp_grid
+  map:
+  - dock: receptor
+
+# OPTIONAL: Reference ligand
+- name: reference
+  optional: true
+  map:
+  - ref: path
+
+# OPTIONAL: Search center
+- name: search_center
+  map:
+  - dock: search_center
+
+# OPTIONAL: Where to save output poses (if save_poses is True)
+- name: save_location
+  value: saved_ligands.sdf
+  map:
+  - saveligs: file
+
+# OPTIONAL: Whether to save output poses
+- name: save_poses
+  map:
+  - saveligs: active
+
+# OPTIONAL: Number of jobs
+- name: n_jobs
+  map:
+  - dock: n_jobs
+
+# OPTIONAL: Number of MC chains for pose search
+- name: exhaustiveness
+  value: 8
+  map:
+  - dock: exhaustiveness
+
+# OPTIONAL: What kind of CNN scoring to use
+- name: cnn_scoring
+  value: rescore
+  map:
+  - dock: cnn_scoring

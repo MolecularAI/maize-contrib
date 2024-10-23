@@ -1,0 +1,5 @@
+,reagentA,reagentB,product,reaction_smarts
+0,NC(=S)N(C)C,[Cl]CC(=O)c1ccccc1,CN(C)c1ncc(-c2ccccc2)s1,[NH2:1][C:2](=[S:3])[NH0:4].[C:5](=[O:6])[C:7][Cl:8]>>[N:4][c:2]1[s:3][c:5][c:7][n:1]1
+1,NC(=S)N(C)C,[Cl]CC(=O)c1ccccc1,CN(C)c1ncc(-c2ccccc2)s1,[NH2:1][C:2](=[S:3])[NH0:4].[C:5](=[O:6])[C:7][Cl:8]>>[N:4][c:2]1[s:3][c:5][c:7][n:1]1
+2,NC(=S)N(C)C,[Cl]CC(=O)c1ccccc1,CN(C)c1ncc(-c2ccccc2)s1,[NH2:1][C:2](=[S:3])[NH0:4].[C:5](=[O:6])[C:7][Cl:8]>>[N:4][c:2]1[s:3][c:5][c:7][n:1]1
+3,NC(=S)N(C)C,[Cl]CC(=O)c1ccccc1,CN(C)c1ncc(-c2ccccc2)s1,[NH2:1][C:2](=[S:3])[NH0:4].[C:5](=[O:6])[C:7][Cl:8]>>[N:4][c:2]1[s:3][c:5][c:7][n:1]1
