@@ -1,0 +1,23 @@
+# Test configuration for maize
+
+# Various options
+scratch = "/tmp"
+packages = [
+    "maize.steps.mai"
+]
+
+# Default batch system options
+[batch]
+system = "local"
+walltime = "24:00:00"
+
+# Step-specific settings
+[vina]
+commands.vina = "./autodock_vina_1_1_2_linux_x86/bin/vina"
+
+[vinascore]
+commands.vina = "./autodock_vina_1_1_2_linux_x86/bin/vina"
+
+[gypsum]
+# scripts.gypsum.interpreter = "python"
+scripts.gypsum.location = "./gypsum_dl/run_gypsum_dl.py"

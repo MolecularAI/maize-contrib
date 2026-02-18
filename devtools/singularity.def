@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: ghcr.io/conda/conda-ci:main-linux-python3.10
+
+%files
+    ./ /maize
+
+%post
+    apt-get update
+    apt-get -y install rsync procps
+    wget https://sourceforge.net/projects/lmod/files/lua-5.1.4.9.tar.bz2
+    tar xf lua-5.1.4.9.tar.bz2
+    cd lua-5.1.4.9
+    ./configure --prefix=/opt/apps/lua/5.1.4.9
+    make; make install
+    cd /opt/apps/lua; ln -s 5.1.4.9 lua
+    ln -s /opt/apps/lua/lua/bin/lua /usr/local/bin
+    ln -s /opt/apps/lua/lua/bin/luac /usr/local/bin
+    cd; wget https://sourceforge.net/projects/lmod/files/Lmod-8.2.tar.bz2
+    tar xf Lmod-8.2.tar.bz2
+    cd Lmod-8.2; ./configure --prefix=/opt/apps --with-fastTCLInterp=no
+    make install
+    ln -s /opt/apps/lmod/lmod/init/profile /etc/profile.d/z00_lmod.sh
+    export LMOD_ROOT=/opt/apps/lmod
+    export LMOD_PKG=/opt/apps/lmod/lmod
+    export LMOD_VERSION=8.2
+    export LMOD_CMD=/opt/apps/lmod/lmod/libexec/lmod
+    export LMOD_DIR=/opt/apps/lmod/lmod/libexec
+    export BASH_ENV=/opt/apps/lmod/lmod/init/bash
+    cd /maize
+    conda env create -f env-users.yml
+    conda run --name maize pip install --no-deps ./
+
+%runscript
+    exec conda run --name maize maize "$@"
+

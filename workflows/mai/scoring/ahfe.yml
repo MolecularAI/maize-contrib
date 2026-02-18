@@ -1,0 +1,108 @@
+# AHFE
+# ====
+#
+# Calculates the absolute hydration free energy of a set of small molecules using OpenFE
+
+name: ahfe
+
+nodes:
+- name: loadlibrary
+  type: LoadLibrary
+- name: mol2isomers
+  type: Mol2Isomers
+- name: openahfe
+  type: OpenAHFE
+- name: isomers2mol
+  type: Isomers2Mol
+- name: savesinglelibrary
+  type: SaveSingleLibrary
+
+channels:
+- sending:
+    loadlibrary: out
+  receiving:
+    mol2isomers: inp
+- sending:
+    mol2isomers: out
+  receiving:
+    openahfe: inp
+- sending:
+    openahfe: out
+  receiving:
+    isomers2mol: inp
+- sending:
+    isomers2mol: out
+  receiving:
+    savesinglelibrary: inp
+
+parameters:
+
+# MANDATORY: SDF file input
+- name: input
+  map:
+  - loadlibrary: path
+
+# MANDATORY: SDF file output
+- name: output
+  map:
+  - savesinglelibrary: file
+
+# OPTIONAL: Equilibration length (ps)
+- name: equilibration_length
+  value: 2000
+  map:
+  - openahfe: equilibration_length
+
+# OPTIONAL: Production length (ps)
+- name: production_length
+  value: 5000
+  map:
+  - openahfe: production_length
+
+# OPTIONAL: Early termination on reaching DG error threshold
+- name: early_termination
+  value: false
+  map:
+  - openahfe: early_termination
+
+# OPTIONAL: Small molecule force field
+- name: molecule_forcefield
+  value: openff-2.1.0
+  map:
+  - openahfe: molecule_forcefield
+
+# OPTIONAL: Solvent model
+- name: solvent
+  value: tip3p
+  map:
+  - openahfe: solvent
+
+# OPTIONAL: Number of repeats
+- name: n_repeats
+  value: 3
+  map:
+  - openahfe: n_repeats
+
+# OPTIONAL: Number of replicas
+- name: n_replicas
+  value: 11
+  map:
+  - openahfe: n_replicas
+
+# OPTIONAL: Number of lambda windows
+- name: n_lambda
+  value: 11
+  map:
+  - openahfe: n_lambda
+
+# OPTIONAL: Number of jobs to run in parallel
+- name: n_jobs
+  value: 4
+  map:
+  - openahfe: n_jobs
+
+# OPTIONAL: The compute platform to use
+- name: platform
+  value: CUDA
+  map:
+  - openahfe: platform

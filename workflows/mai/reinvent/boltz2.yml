@@ -1,0 +1,70 @@
+# Boltz2 workflow for REINVENT
+# =====
+#
+# Runs co-folding with Boltz2
+name: RNVBoltz2
+nodes:
+  - name: smiles
+    type: ReinventEntry
+  - name: boltz2
+    type: Boltz2
+  - name: rnv
+    type: ReinventExit
+  - name: void
+    type: Void
+channels:
+  - sending:
+      smiles: out
+    receiving:
+      boltz2: inp
+  - sending:
+      boltz2: out
+    receiving:
+      rnv: inp
+  - sending:
+      smiles: out_metadata
+    receiving:
+      void: inp
+parameters:
+  # this is basic pumping of SMILES from ReinventEntry to ReinventExit
+  - name: inp   # DO NOT TOUCH: critical REINVENT interface parameter
+    map:
+      - smiles: data
+  - name: out   # DO NOT TOUCH: critical REINVENT interface parameter
+    map:
+      - rnv: data
+  # the protein needs to be supplied as FASTA
+  - name: input_fasta
+    value: [INPUT FASTA STRING]
+    map:
+      - boltz2: inp_seq
+  # precomputed MSA file for the target sequence
+  - name: input_msa
+    value: [PATH to MSA file]
+    map:
+      - boltz2: inp_msa
+  # for affinity prediction we can use a minimal set for structure prediction diffusion
+  - name: diffusion_samples
+    value: 1
+    map:
+      - boltz2: diffusion_samples
+  # for affinity prediction, we benefit from using multiple diffusion samples
+  - name: diffusion_samples_affinity
+    value: 5
+    map:
+      - boltz2: diffusion_samples_affinity
+  # this could be further reduced
+  - name: sampling_steps
+    value: 50
+    map:
+      - boltz2: sampling_steps
+  # sampling for affinity prediction would reduce accuracy
+  - name: sampling_steps_affinity
+    value: 50
+    map:
+      - boltz2: sampling_steps_affinity
+  # return all scores from Boltz2, needs updated (v4.7.15+) REINVENT
+  - name: scores
+    value: __return_all
+    map:
+      - rnv: tag

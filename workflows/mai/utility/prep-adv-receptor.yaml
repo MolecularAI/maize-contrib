@@ -1,0 +1,64 @@
+# Receptor preparation
+# ====================
+#
+# Runs a simple protein preparation step for AutoDock, Vina, GNINA, and related tools (yielding a PDBQT file)
+
+name: prep
+
+nodes:
+- name: preparepdbqt
+  type: PreparePDBQT
+- name: saverec
+  type: SaveFile
+- name: saveflex
+  type: SaveFile
+
+channels:
+- sending:
+    preparepdbqt: out
+  receiving:
+    saverec: inp
+- sending:
+    preparepdbqt: out_flex
+  receiving:
+    saveflex: inp
+
+parameters:
+
+# Input PDB file, potentially with protonation state / partial charges specified
+- name: input
+  map:
+  - preparepdbqt: inp
+
+# Output PDBQT file
+- name: output
+  map:
+  - saverec: destination
+
+# Optional output flexible PDBQT file
+- name: flex
+  map:
+  - saveflex: destination
+
+# Repairs to be done on the file, can be one of:
+# "bonds_hydrogens", "bonds", "hydrogens", "checkhydrogens", "None"
+- name: repairs
+  map:
+  - preparepdbqt: repairs
+
+# Cleanup to be done on the file, can be a combination of:
+# "nphs", "lps", "waters", "nonstdres", "deleteAltB"
+- name: cleanup
+  map:
+  - preparepdbqt: cleanup_protein
+
+# List of flexible residues (optional), list in the form XXX123
+- name: flexible
+  map:
+  - preparepdbqt: flexible_residues
+
+# Whether to preserve partial charges
+- name: preserve_charges
+  value: true
+  map:
+  - preparepdbqt: preserve_charges

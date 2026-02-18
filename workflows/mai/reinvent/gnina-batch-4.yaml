@@ -1,0 +1,208 @@
+# GNINA
+# =====
+#
+# Runs docking with GNINA in multiple batches (with a REINVENT interface)
+
+name: gnina-multi
+
+nodes:
+- name: reinvententry
+  type: ReinventEntry
+- name: loadmolecule
+  type: LoadMolecule
+- name: copy-ref
+  type: Copy
+- name: void
+  type: Void
+- name: ligprep
+  type: Ligprep
+- name: batch
+  parameters:
+    n_batches: 4  # Hard-coded for this workflow with 4 docking nodes, adjust if modifying
+  type: Batch
+- name: roundrobin
+  type: RoundRobin
+- name: mergelists
+  type: MergeLists
+- name: copy-iso
+  type: Copy
+- name: bestisomerfilter
+  type: BestIsomerFilter
+- name: savesinglelibrary
+  type: SaveSingleLibrary
+- name: reinventexit
+  type: ReinventExit
+- name: dock-0
+  type: GNINA
+- name: dock-1
+  type: GNINA
+- name: dock-2
+  type: GNINA
+- name: dock-3
+  type: GNINA
+
+channels:
+- sending:
+    copy-ref: out
+  receiving:
+    dock-0: inp_ref
+- sending:
+    roundrobin: out
+  receiving:
+    dock-0: inp
+- sending:
+    dock-0: out
+  receiving:
+    mergelists: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-1: inp_ref
+- sending:
+    roundrobin: out
+  receiving:
+    dock-1: inp
+- sending:
+    dock-1: out
+  receiving:
+    mergelists: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-2: inp_ref
+- sending:
+    roundrobin: out
+  receiving:
+    dock-2: inp
+- sending:
+    dock-2: out
+  receiving:
+    mergelists: inp
+- sending:
+    copy-ref: out
+  receiving:
+    dock-3: inp_ref
+- sending:
+    roundrobin: out
+  receiving:
+    dock-3: inp
+- sending:
+    dock-3: out
+  receiving:
+    mergelists: inp
+- sending:
+    reinvententry: out
+  receiving:
+    ligprep: inp
+- sending:
+    reinvententry: out_metadata
+  receiving:
+    void: inp
+- sending:
+    ligprep: out
+  receiving:
+    batch: inp
+- sending:
+    batch: out
+  receiving:
+    roundrobin: inp
+- sending:
+    mergelists: out
+  receiving:
+    copy-iso: inp
+- sending:
+    copy-iso: out
+  receiving:
+    reinventexit: inp
+- sending:
+    loadmolecule: out
+  receiving:
+    copy-ref: inp
+- sending:
+    copy-iso: out
+  receiving:
+    bestisomerfilter: inp
+- sending:
+    bestisomerfilter: out
+  receiving:
+    savesinglelibrary: inp
+
+# DO NOT TOUCH: This is the required input parameter
+parameters:
+- name: inp
+  map:
+  - reinvententry: data
+
+# DO NOT TOUCH: JSON output for REINVENT
+- name: out
+  map:
+  - reinventexit: data
+
+# MANDATORY: Receptor to use for docking
+- name: inp_grid
+  map:
+  - dock-0: receptor
+  - dock-1: receptor
+  - dock-2: receptor
+  - dock-3: receptor
+
+# OPTIONAL: Reference ligand
+- name: reference
+  map:
+  - loadmolecule: path
+
+# OPTIONAL: Search center
+- name: search_center
+  map:
+  - dock-0: search_center
+  - dock-1: search_center
+  - dock-2: search_center
+  - dock-3: search_center
+
+# OPTIONAL: Whether to use the GPU
+- name: gpu
+  value: false
+  map:
+  - dock-0: gpu
+  - dock-1: gpu
+  - dock-2: gpu
+  - dock-3: gpu
+
+# OPTIONAL: Where to save output poses (if save_poses is True)
+- name: save_location
+  value: saved_ligands.sdf
+  map:
+  - savesinglelibrary: file
+
+# OPTIONAL: Whether to save output poses
+- name: save_poses
+  value: true
+  map:
+  - savesinglelibrary: active
+
+# OPTIONAL: Number of cores per job
+- name: cores_per_job
+  value: 2
+  map:
+  - dock-0: n_jobs
+  - dock-1: n_jobs
+  - dock-2: n_jobs
+  - dock-3: n_jobs
+
+# OPTIONAL: Number of MC chains for pose search
+- name: exhaustiveness
+  value: 8
+  map:
+  - dock-0: exhaustiveness
+  - dock-1: exhaustiveness
+  - dock-2: exhaustiveness
+  - dock-3: exhaustiveness
+
+# OPTIONAL: What kind of CNN scoring to use
+- name: cnn_scoring
+  value: rescore
+  map:
+  - dock-0: cnn_scoring
+  - dock-1: cnn_scoring
+  - dock-2: cnn_scoring
+  - dock-3: cnn_scoring

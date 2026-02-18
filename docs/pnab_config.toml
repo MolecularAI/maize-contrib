@@ -1,0 +1,20 @@
+
+scratch = "/tmp"
+
+# Additional packages to load
+packages = [
+    "maize.steps.mai"
+]
+
+# Batch job system options
+[batch]
+system = "local"           # Can be one of {'cobalt', 'flux', 'local', 'lsf', 'pbspro', 'rp', 'slurm'}
+max_jobs = 100             # The maximum number of jobs that can be submitted by a node at once
+queue = "core"
+
+
+# The next sections configure nodes requiring specific executables,
+[GenOligo]
+commands.pdb_reres = "/projects/mai/se_mai/users/${USER}_pallavi/softwares/miniconda3/envs/maize-pnab/bin/pdb_reres"
+
+

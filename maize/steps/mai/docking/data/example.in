@@ -1,0 +1,7 @@
+[CONSTRAINT_GROUP:1]
+    USE_CONS   A:ASP:93:OD1(hbond):1,
+    NREQUIRED_CONS   ALL
+
+[FEATURE:1]
+    PATTERN1   "[#1][#7] 1 include"
+

@@ -1,0 +1,83 @@
+
+# ProLIF
+# =====
+#
+# Executes ProLIF to compute interaction fingerprints (IFPs), saves the results,
+# calculates the masked Tanimoto similarity against a reference IFP,
+# and determines the total number of interactions.
+
+name: ProLIF
+
+nodes:
+- name: loadlibrary  
+  type: LoadLibrary
+- name: plifps
+  type: PLIfps
+- name: customifp
+  type: custom_ifp
+- name: maskedtanimoto
+  type: masked_tanimoto
+- name: savesinglelibrary
+  type: SaveSingleLibrary
+
+channels:
+- sending:
+    loadlibrary: out
+  receiving:
+    plifps: inp
+- sending:
+    plifps: out
+  receiving:
+    maskedtanimoto: inp
+- sending:
+    customifp: out
+  receiving:
+    maskedtanimoto: ref_ifps
+- sending:
+    maskedtanimoto: out
+  receiving:
+    savesinglelibrary: inp
+
+parameters:
+
+# MANDATORY: SDF file input
+- name: input
+  value: in_ligands.sdf
+  map:
+  - loadlibrary: path
+
+# MANDATORY: SDF file output
+- name: output
+  value: out_ligands.sdf
+  map:
+  - savesinglelibrary: file
+
+# MANDATORY: Receptor PDB file
+- name: receptor
+  value: protein.pdb
+  map:
+  - plifps: inp_rec
+
+# MANDATORY: Residues to consider
+- name: residue
+  value: ['ARG48.A', 'TYR52.A', 'LYS172.A', 'PHE198.A', 'TYR199.A','ASN203.A','TYR331.A','TRP332.A','TYR335.A','PHE336.A', 'THR370.A', 'ASP373.A','ALA374.A','GLU465.A','SER469.A','PHE475.A','PHE492.A','PHE493.A','SER500.A']
+  map:
+  - customifp: residues
+  - plifps: residues
+  
+# MANDATORY: Interactions to consider
+- name: interaction
+  value: ['HBAcceptor', 'HBDonor', 'Cationic', 'PiCation', 'PiStacking']
+  map:
+  - customifp: interaction_type
+
+# MANDATORY: Define reference interaction
+- name: ref_interaction
+  value: {
+    "ARG48.A": ["HBAcceptor"],
+    "LYS172.A": ["PiCation"],
+    "PHE198.A": ["PiStacking"],
+    "TYR199.A": ["PiStacking", "HBDonor"],
+    "PHE493.A": ["PiStacking"]}
+  map:
+  - customifp: onbit

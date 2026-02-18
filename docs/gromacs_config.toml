@@ -1,0 +1,20 @@
+
+scratch = "/tmp"
+
+# Additional packages to load
+packages = [
+    "maize.steps.mai"
+]
+
+# Batch job system options
+[batch]
+system = "slurm"           # Can be one of {'cobalt', 'flux', 'local', 'lsf', 'pbspro', 'rp', 'slurm'}
+max_jobs = 100             # The maximum number of jobs that can be submitted by a node at once
+queue = "core"
+launcher = "srun"         # The launcher to use for the command, usually one of {'srun', 'mpirun', 'mpiexec'}
+walltime = "3:00:00"     # Job walltime limit, shorter times may improve queueing times
+
+
+[MDsRNA]
+modules = ["CMake/3.20.1-GCCcore-10.3.0", "foss/2021a", "GROMACS/2021.3-foss-2021a-CUDA-11.3.1-PLUMED-2.7.2"]
+commands.gmx = "/opt/scp/apps/gen-2021a/software/GROMACS/2021.3-foss-2021a-CUDA-11.3.1-PLUMED-2.7.2/bin/gmx"

@@ -1,0 +1,100 @@
+# GNINA
+# =====
+#
+# Runs docking with GNINA (with a LiveDesign interface)
+#
+# LiveDesign can call arbitrary code through the custom protocol functionality.
+# This is accomplished by running a shell script with selected molecules being
+# passed in as an SDF file. As output, it expects a CSV file being written to
+# STDOUT in a specific format. We can also supply custom parameter input in the
+# form of flags, strings, numbers, and additional files. The script run by
+# LiveDesign should look something like this:
+#
+# /path/to/maize --log maize.log gnina.yaml --file ${SDF_FILE} --out output.csv \
+#   --inp_grid ${GRID:FILE-INPUT} --reference ${REF:TEXT-INPUT} \
+#   --exhaustiveness ${EXHAUSTIVENESS:NUMERIC-INPUT} && cat output.csv
+
+name: gnina
+
+nodes:
+- name: load
+  type: LoadLibrary
+- name: name
+  type: SetName
+  parameters:
+    tag: ID
+- name: copy
+  type: Copy
+- name: getref
+  type: ExtractReference
+- name: dock
+  type: GNINA
+- name: saveligs
+  type: SaveCSV
+  parameters:
+    format: livedesign
+
+channels:
+- sending:
+    load: out
+  receiving:
+    name: inp
+- sending:
+    name: out
+  receiving:
+    copy: inp
+- sending:
+    copy: out
+  receiving:
+    dock: inp
+- sending:
+    copy: out
+  receiving:
+    getref: inp
+- sending:
+    getref: out
+  receiving:
+    dock: inp_ref
+- sending:
+    dock: out
+  receiving:
+    saveligs: inp
+
+parameters:
+
+# DO NOT TOUCH: This is the required input SDF file
+- name: file
+  map:
+  - load: path
+
+# DO NOT TOUCH: CSV output for LiveDesign, this needs to be sent to STDOUT when creating the protocol
+- name: out
+  map:
+  - saveligs: file
+
+# MANDATORY: Receptor to use for docking (PDB file)
+- name: inp_grid
+  map:
+  - dock: receptor
+
+# MANDATORY: Reference ligand ID
+- name: reference
+  map:
+  - getref: iso_name
+
+# OPTIONAL: Number of jobs
+- name: n_jobs
+  map:
+  - dock: n_jobs
+
+# OPTIONAL: Number of MC chains for pose search
+- name: exhaustiveness
+  value: 8
+  map:
+  - dock: exhaustiveness
+
+# OPTIONAL: What kind of CNN scoring to use
+- name: cnn_scoring
+  value: rescore
+  map:
+  - dock: cnn_scoring

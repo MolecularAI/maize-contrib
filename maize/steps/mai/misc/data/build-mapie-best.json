@@ -1,0 +1,52 @@
+{
+  "data": {
+    "training_dataset_file": "pool-small.csv",
+    "input_column": "smiles",
+    "response_column": "score",
+    "deduplication_strategy": {
+      "name": "KeepMedian"
+    },
+    "split_strategy": {
+      "name": "NoSplitting"
+    },
+    "test_dataset_file": null,
+    "save_intermediate_files": false,
+    "probabilistic_threshold_representation": false,
+    "probabilistic_threshold_representation_threshold": null,
+    "probabilistic_threshold_representation_std": null
+  },
+  "metadata": {
+    "cross_validation": 5,
+    "shuffle": false,
+    "best_trial": 66,
+    "best_value": -0.41317784999999996,
+    "n_trials": 100,
+    "visualization": null
+  },
+  "descriptor": {
+    "name": "MACCS_keys",
+    "parameters": {}
+  },
+  "settings": {
+    "mode": "regression",
+    "scoring": "neg_mean_squared_error",
+    "direction": "minimize",
+    "n_trials": 100,
+    "tracking_rest_endpoint": null
+  },
+  "algorithm": {
+    "name": "Mapie",
+    "parameters": {
+      "alpha": 0.2,
+      "estimator": {
+        "name": "RandomForestRegressor",
+        "parameters": {
+          "max_depth": 8,
+          "n_estimators": 10,
+          "max_features": "auto"
+        }
+      }
+    }
+  },
+  "task": "building"
+}
