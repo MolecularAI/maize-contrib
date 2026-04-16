@@ -158,6 +158,20 @@ class Schrodinger(Node, register=False):
     host: Parameter[str] = Parameter(default="localhost")
     """Host to use for job submission"""
 
+    driverhost: Parameter[str] = Parameter(optional=True)
+    """Host for the driver/coordinator process of distributed jobs.
+    Overrides ``-HOST`` for the driver only, allowing the lightweight
+    coordinator to run on a dedicated partition while subjobs use
+    compute hosts specified by ``host`` (or ``subhost``).
+    Only relevant when ``n_jobs > 1``. See the Schrodinger documentation
+    section 'The HOST, DRIVERHOST, and SUBHOST Options' for details."""
+
+    subhost: Parameter[str] = Parameter(optional=True)
+    """Host(s) for subjobs of distributed jobs. Overrides ``-HOST``
+    for subjobs only. When set, ``-HOST`` specifies only the driver
+    location. See the Schrodinger documentation section 'Running
+    Distributed Schrodinger Jobs' for details."""
+
     fallback: Flag = Flag(default=False)
     """If the host is not compatible, will fallback to 'localhost'"""
 
@@ -356,7 +370,7 @@ class Schrodinger(Node, register=False):
         # will be correctly setup all subsequent attempts
         if _n_failures == 0:
             # Cleanup command from previously specified values
-            for token in ("-JOBNAME", "-HOST", "-NJOBS"):
+            for token in ("-JOBNAME", "-HOST", "-NJOBS", "-DRIVERHOST", "-SUBHOST"):
                 if token in command:
                     idx = command.index(token)
                     command.pop(idx + 1)
@@ -372,6 +386,16 @@ class Schrodinger(Node, register=False):
                 host = f"{host}:{self.n_jobs.value}"
             command.extend(["-HOST", host])
             command.extend(["-NJOBS", str(self.n_jobs.value)])
+
+            # For distributed jobs (n_jobs > 1), allow separate routing of the
+            # driver/coordinator process and subjobs. This follows Schrodinger's
+            # Job Control conventions: -DRIVERHOST overrides -HOST for the driver,
+            # -SUBHOST overrides -HOST for subjobs. When neither is set, all
+            # processes use the -HOST value (existing behavior).
+            if self.driverhost.is_set:
+                command.extend(["-DRIVERHOST", self.driverhost.value])
+            if self.subhost.is_set:
+                command.extend(["-SUBHOST", self.subhost.value])
 
             # Add the actual args at the end to maintain correct ordering
             if isinstance(args, str):
